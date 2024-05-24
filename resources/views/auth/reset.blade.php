@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reset password</title>
+  <title>réinitialiser le mot de passe</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -31,7 +31,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline" id="ver">
     <div class="card-header text-center" id="ver">
-      <a href="" class="h1" style="color:black"><b>Reset password</a>
+      <a href="" class="h1" style="color:black"><b>réinitialiser le mot de passe</a>
     </div>
     <div class="card-body">
 
@@ -39,7 +39,7 @@
       <form action="" method="post">
         {{ csrf_field()}}
         <div class="input-group mb-3">
-          <input type="password" class="form-control" required name="password" placeholder="password">
+          <input type="password" class="form-control" required name="password" placeholder="mot de passe">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="password" class="form-control" required name="cpassword" placeholder="Confirm password">
+            <input type="password" class="form-control" required name="cpassword" placeholder="Confirmer le mot de passe">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -58,7 +58,7 @@
 
         <div class="row">
           <div class="col-4">
-            <button type="submit" class="btn btn-block" id="nij">Reset</button>
+            <button type="submit" class="btn btn-block" id="nij">réinitialise</button>
           </div>
         </div>
       </form>

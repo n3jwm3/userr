@@ -3,89 +3,86 @@
 <style>
     #nij{
         background-color: #FEF5E7;
-    }</style>
- <div class="content-wrapper" id="nij">
+    }
+    .bloc img {
+    width: 60px;
+    height: 55px;
 
-    <!-- Content Header (Page header) -->
+
+}
+#im{
+    background-color: #fff;
+}
+#ml{
+    margin-top: 20px;
+}
+
+   </style>
+
+ <div class="content-wrapper" id="nij">
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
 
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-
-    {{--<section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
+          <div class="container-fluid" id="ml">
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <div class="small-box"  id="im">
+                            {{--<img src="{{ asset('Images/specialite-removebg-preview.png') }}" alt="Description de l'image" >--}}
+                            <div class="icon">
+                                <i class="fas fa-chalkboard-teacher" style="color:#35512f;"></i>
+                              </div>
+                  <div class="inner">
+                    <h3>{{\App\Models\User::where('user_type', 2)->count()}}</h3>
+                    <p>Enseignants</p>
+                  </div>
+                  <div class="small-box-footer"> Enseignants</div>
+                </div>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
+
+              <div class="col-lg-3 col-6">
+                <div class="small-box"  id="im">
+                  <div class="inner">
+                    <h3>{{\App\Models\specialite::count()}}</h3>
+                    <p>Spécialités</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-graduation-cap" style="color:#35512f;"></i>
+                  </div>
+                  <div class="small-box-footer">Spécialités</div>
+                </div>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <div class="col-lg-3 col-6">
+                <div class="small-box"  id="im">
+                  <div class="inner">
+                    <h3>{{\App\Models\Local::count()}}</h3>
+                    <p> Locaux</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-building" style="color:#35512f;"></i>
+                  </div>
+                  <div class="small-box-footer"> Locaux </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <div class="small-box"  id="im">
+                  <div class="inner">
+                    <h3>{{\App\Models\Groupe::sum('nombre_etudiant')}}</h3>
+
+                    <p>Etudiants</p>
+                  </div>
+                    <div class="icon">
+                    <i class="ion ion-person" style="color:#35512f;"></i>
+                   {{--  <div class="bloc"><img src="{{ asset('Images/specialite-removebg-preview.png') }}" alt="Description de l'image" ></div>--}}
+                      </div>
+                  <div class="small-box-footer">Etudiants</div>
+                </div>
+              </div>
+
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                <p>Bounce Rate</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
         </div>
-
-      </div><!-- /.container-fluid -->
-   {{-- </section>--}
-
-  {{-----}}</div>
+      </div>
+    </div></div>
 @endsection

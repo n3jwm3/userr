@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('prenom')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->tinyInteger('user_type')->default(3)->comment('1:admin, 2:teacher, 3:student, 4:parent');
+            $table->string('grade')->nullable();
+            $table->enum('type', ['vacataire', 'permanent', 'doctorant'])->nullable();
+            $table->tinyInteger('user_type')->default(1)->comment('1:admin, 2:teacher');
             $table->timestamps();
         });
     }

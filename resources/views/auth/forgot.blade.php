@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Forgote password</title>
+  <title>Mot de passe oublié</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -31,7 +31,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline" id="ver">
     <div class="card-header text-center" id="ver">
-      <a href="" class="h1" style="color:black"><b>Forgot password</a>
+      <a href="" class="h1" style="color:black"><b>Mot de passe oublié</a>
     </div>
     <div class="card-body">
 
@@ -49,7 +49,7 @@
 
         <div class="row">
           <div class="col-4">
-            <button type="submit" class="btn  btn-block" id="nij">Forgot</button>
+            <button type="submit" class="btn  btn-block" id="nij">oublié</button>
           </div>
         </div>
       </form>
@@ -58,7 +58,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="" style="color:black">Login</a>
+        <a href="{{ url('/login') }}" style="color:black">Login</a>
       </p>
     </div>
     <!-- /.card-body -->

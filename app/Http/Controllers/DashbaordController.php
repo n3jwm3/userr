@@ -9,7 +9,7 @@ class DashbaordController extends Controller
 {
     public function dashbaord()
     {
-         $data['header_title'] =  'Dashbaord';
+         $data['header_title'] =  'Acceuil';
         if(Auth::user()->user_type == 1)
         {
             return view('admin.dashbaord',$data);
@@ -18,13 +18,6 @@ class DashbaordController extends Controller
         {
             return view('teacher.dashbaord',$data);
         }
-        elseif(Auth::user()->user_type == 3)
-        {
-            return view('student.dashbaord',$data);
-        }
-        elseif(Auth::user()->user_type == 4)
-        {
-            return view('parent.dashbaord',$data);
-        }
+       
     }
 }

@@ -41,12 +41,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    static public function getSingle($id){
+        return self::find($id);
 
+    }
     static public function getAdmin(){
         return User::select('users.*')->where('user_type','=',1)
         ->orderBy('id', 'desc')->get();
-
     }
+    static public function getTeacher(){
+        return User::select('users.*')->where('user_type','=',2)
+        ->orderBy('id', 'desc')->get();
+     }
     static public function getEmailSingle($email){
         return User::where('email' , '=' , $email)->first();
 
@@ -55,11 +61,21 @@ class User extends Authenticatable
         return User::where('remember_token' , '=' , $remember_token)->first();
 
     }
-    // Modèle User
 
-public function addedBy()
-{
-    return $this->hasMany(User::class, 'added_by', 'id');
-}
+    // la relation avec examen:
+    public function examens()
+    {
+       // return $this->belongsToMany(Examen::class,'examens_enseignants');
+    }
+
+    // fonction pour relier avec module
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class,'users_modules');
+    }
+
+
+
+
 
 }

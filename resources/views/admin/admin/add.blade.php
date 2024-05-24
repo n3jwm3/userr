@@ -1,12 +1,33 @@
 @extends('layouts.app')
 @section('content')
-<div class="content-wrapper">
+<style>
+     #essay{
+            margin-left: 550px;
+    margin-top: 10px;
+    width: calc(100% - 250px);
+
+    background-color: #FEF5E7;
+        }
+        #aj {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            margin-right: 60px;
+            border-radius: 5px;
+            background-color: #35512f; /* Même couleur de fond que dans le deuxième code */
+
+            cursor: pointer;
+        }
+
+</style>
+
+<div class="content-wrapper" id="essay">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add new admin</h1>
+            <h1>Ajouter un administrateur</h1>
           </div>
 
         </div>
@@ -26,11 +47,12 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" required placeholder="Name">
+                        <input type="text" class="form-control" value="{{ old('name')}}" name="name" required placeholder="Name">
                       </div>
                   <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" name="email" required placeholder="Email">
+                    <input type="email" class="form-control" value="{{ old('email')}}"  name="email" required placeholder="Email">
+                    <div style="color: red">{{ $errors->first('email')}}</div>
                   </div>
                   <div class="form-group">
                     <label >Password</label>
@@ -40,7 +62,9 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-dark" id="aj">
+                        {{ __('Ajouter') }}
+                    </button>
                 </div>
               </form>
             </div>
