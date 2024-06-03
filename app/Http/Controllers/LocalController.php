@@ -103,6 +103,9 @@ class LocalController extends Controller
 }
 public function import_excel_local_post(Request $request)
    {
+    $request->validate([
+        'excel-file' => 'required|file|mimes:xlsx,xls,csv',
+    ]);
        Excel::import(new LocalImport,$request->file('excel-file'));
        return redirect()->route("local.index")->with([
         "success" => "Importation avec succes"

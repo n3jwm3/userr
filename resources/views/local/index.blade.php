@@ -32,11 +32,8 @@
            <button type="submit"  class="btn btn-dark" id="aj">Importer</button>
            </div>
        </form>
-       <div class="row my-5">
-        <div class="col-md-6 mx-auto">
-            @include('alert')
-        </div>
-    </div>
+       @include('_message')
+       
         <div class="text-end"> <a href="{{ route('local.create') }}" >
 
             <img src="{{ asset('assets/add.png') }}" alt="Description de l'image">
@@ -107,6 +104,15 @@
             });
         });
     </script>
+    @if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+        });
+    </script>
+@endif
     @if(session()->has("success"))
     <script>
         Swal.fire({

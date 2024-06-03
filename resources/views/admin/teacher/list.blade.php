@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/r-2.2.7/datatables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         #mk{
         padding: 50px;
@@ -34,6 +35,7 @@
     <div  id="essay">
         <div class="row" >
             <div class="col-md-9 mx-auto" >
+
                 <form action="{{ url('import-excel') }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="mb-3" style="width: 500px;">
@@ -130,6 +132,16 @@
             });
         });
     </script>
+
+@if ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+            });
+        </script>
+    @endif
      @if(session()->has("success"))
      <script>
          Swal.fire({
@@ -177,7 +189,7 @@
  </script>
     @stop
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-
+   
     @endsection
     @section('styles')
         <link rel="stylesheet" href="{{ asset('assets/app.css')}}">

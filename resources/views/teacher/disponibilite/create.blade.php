@@ -83,22 +83,19 @@
         <form method="POST" class="mt-3" action="{{ route('str') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-5" id="in3">
-                <h5 >Choisissez votre date </h5>
+                <h5 >Choisissez votre date et Choisissez les crenaux </h5>
                 <div class="col-7 mx-auto">
-                    <input type="date" name="jour" class="form-control" required>
-                </div>
-            </div>
-            <div class="form-group mb-5" id="in3">
-                <h5>Choisissez les crenaux </h5>
-                <div class="col-7 mx-auto">
-                    <select name="crenaux[]" id="crenaux" multiple>
-                        <option value="8h-10h">8h-10h</option>
-                        <option value="10h-12h">10h-12h</option>
-                        <option value="12h-14h">12h-14h</option>
-                        <option value="14h-16h">14h-16h</option>
+                    <select name="crenau_id" class="form-control" required>
+                        <option value="">Sélectionner un créneau</option>
+                        @foreach($crenaux as $creneau)
+                            <option value="{{ $creneau->id }}">
+                                {{ $creneau->crenaux }} - {{ $creneau->jour->jour }}
+                            </option>
+                        @endforeach
                     </select>
-                </div>
+                </div> 
             </div>
+
             <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
             <script>
                 new MultiSelectTag('crenaux')  // id

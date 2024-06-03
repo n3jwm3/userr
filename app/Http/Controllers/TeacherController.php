@@ -111,6 +111,11 @@ class TeacherController extends Controller
     }
     public function import_excel_post(Request $request)
        {
+         // Validation du fichier
+         $request->validate([
+            'excel-file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
 
            Excel::import(new UserImport,$request->file('excel-file'));
            return redirect()->route('listte')->with([

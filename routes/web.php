@@ -104,6 +104,23 @@ Route::resource('local',LocalController::class);
  Route::get('import_excel_local', [LocalController::class, 'import_excel_local']);
  Route::post('import_excel_local', [LocalController::class, 'import_excel_local_post']);
 
+
+ //lien de bachir de algo
+ Route::get('/GestionPlanning', [\App\Http\Controllers\GestionplanningController::class, 'index'])->name('GestionPlanning');
+Route::get('/GestionHoraire', [\App\Http\Controllers\GestionHorraireController::class, 'index'])->name('GestionHoraire');
+// la route pour afficher le planning pour examen :
+Route::get('planning','App\Http\Controllers\PlanningController@afficherplanning')->name('planning');
+
+
+// la route pour la génération
+ Route::post('/generation/traitement','App\Http\Controllers\GestionplanningController@gererexamen');
+
+// traitement pour plusieurs affectation :
+Route::post('/traitement/cre','App\Http\Controllers\CrenauController@affecter');
+
+
+// la route pour la génération :
+Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning');
 });
 
 

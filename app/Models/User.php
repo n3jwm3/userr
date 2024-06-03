@@ -65,7 +65,7 @@ class User extends Authenticatable
     // la relation avec examen:
     public function examens()
     {
-       // return $this->belongsToMany(Examen::class,'examens_enseignants');
+        return $this->belongsToMany(Examen::class,'examens_enseignants');
     }
 
     // fonction pour relier avec module
@@ -74,7 +74,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Module::class,'users_modules');
     }
 
-
+ // la fontion pour relier enseignant et crenaux :
+ public function crenaus()
+ {
+     return $this->belongsToMany(Crenau::class,'crenaus_enseignants');
+ }
 
 
 

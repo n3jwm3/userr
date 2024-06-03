@@ -78,8 +78,7 @@
                                     <tr>
 
                                         <th>Id</th>
-                                        <th>Date</th>
-                                        <th>Crenaux</th>
+                                        <th>Date et Crenaux</th>
                                         <th>Actions</th>
                                     </tr>
 
@@ -89,35 +88,15 @@
                                 @foreach ($getRecord as $value)
                                 <tr>
                                     <td>{{ $value->id }}</td>
-                                    <td>{{ $value->jour }}</td>
-
                                     <td>
-                                  @if ( $value->crenaux == '8h-10h')
-                                      <span >8h-10h</span>
-                                   @elseif ( $value->crenaux == '10h-12h')
-                                    <span >10h-12h</span>
-                                    @elseif ( $value->crenaux == '12h-14h')
-
-                                    <span >12h-14h</span>
-                                    @elseif ( $value->crenaux == '14h-16h')
-
-                                    <span >14h-16h</span>
-
-
-                                    @endif
-                                    @php
-                                         $crenaux = explode(',',  $value->crenaux); // Séparer les créneaux par des virgules
-                                 @endphp
-                             @foreach ($crenaux as $crenaux)
-                                <span>{{ $crenaux }}</span><br>
-                            @endforeach
-
-
+                                        {{ $value->crenau->jour->jour }} - {{ $value->crenau->crenaux }}
                                     </td>
+
+
 
                                     <td class="d-flex justify-content-center align-items-center">
 
-                                       {{-- <a href="{{ route('#', $value->id) }}"
+                                      {{-- <a href="{{ route('', $value->id) }}"
                                             class="btn btn-sm btn-warning mx-2">
                                             <i class="fas fa-edit"></i>
                                         </a>--}}

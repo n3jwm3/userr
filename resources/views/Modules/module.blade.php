@@ -59,7 +59,7 @@
                     <td>
                        @foreach ($m->enseignants as $e)
                             <ul>
-                                <ol>{{$e->prenom}}</ol>
+                                <ol>{{$e->name}}</ol>
                             </ul>
                         @endforeach
 

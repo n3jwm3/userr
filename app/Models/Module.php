@@ -27,7 +27,7 @@ class Module extends Model
     // la focntion pour relier les module et examen :
     public function examens()
     {
-       // return $this->hasMany(Examen::class);
+        return $this->hasMany(Examen::class);
     }
 
 }

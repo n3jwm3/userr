@@ -14,22 +14,16 @@ class Local extends Model
         'type',
     ];
 
-    // focntion pour relier local avec groupe :
-    public function groupes()
-    {
-        //return $this->belongsToMany(Groupe::class,'groupes_locals');
-    }
+// focntion pour relier avec crenaux :
+public function crenaus()
+{
+    return $this->belongsToMany(Crenau::class);
+}
 
-    // relation de local avec non disponibilite :
+// relation evace examen :
+public function examens()
+{
+    return $this->hasMany(Examen::class);
+}
 
-    public function nondisponibilites()
-    {
-       // return $this->belongsToMany(Nondisponibilite::class,'nondisponibilites_locals');
-    }
-
-    // relation evace examen :
-    public function examens()
-    {
-       // return $this->belongsToMany(Examen::class,'examens_locals');
-    }
 }

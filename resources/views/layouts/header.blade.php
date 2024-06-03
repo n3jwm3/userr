@@ -103,7 +103,7 @@
               </li>
               {{--emploi de temps--}}
               <li class="nav-item" id="texte">
-                <a href="{{url('#')}}" class="nav-link" id="texte">
+                <a href="{{ route('GestionPlanning') }}" class="nav-link" id="texte">
                     <i class="fas fa-calendar-alt"></i>
                   <p>
                     Emplois du temps

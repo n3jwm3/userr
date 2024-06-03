@@ -18,7 +18,7 @@ class specialite extends Model
     // la focntion pour relier les module et specialite :
     public function modules()
     {
-      //  return $this->hasMany(Module::class);
+       return $this->hasMany(Module::class);
     }
     public function sections()
     {
