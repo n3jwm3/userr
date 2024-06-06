@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,6 +10,7 @@ use App\Models\Examen;
 use App\Models\User;
 use App\Models\Jour;  // Modèle User pour les enseignants
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class GestionHorraireController extends Controller
 {
@@ -66,7 +66,7 @@ class GestionHorraireController extends Controller
 
     private function findAvailableLocals($crenau, $locaux, $module, $groupes, &$localCapacities)
     {
-        $occupiedLocals = \DB::table('crenaus_locals')->where('crenau_id', $crenau->id)->pluck('local_id')->toArray();
+        $occupiedLocals = DB::table('crenaus_locals')->where('crenau_id', $crenau->id)->pluck('local_id')->toArray();
         $selectedLocals = [];
 
         foreach ($locaux as $local) {
@@ -88,7 +88,7 @@ class GestionHorraireController extends Controller
 
         while (true) {
             $responsableDisponible = $responsablesModule->first(function ($responsable) use ($crenau) {
-                return !\DB::table('crenaus_enseignants')
+                return !DB::table('crenaus_enseignants')
                     ->where('user_id', $responsable->id)
                     ->where('crenau_id', $crenau->id)
                     ->exists();
@@ -114,7 +114,7 @@ class GestionHorraireController extends Controller
                                 $responsableAssigned = true;
                             } else {
                                 $responsableId = $enseignants->filter(function ($enseignant) use ($crenau) {
-                                    return !\DB::table('crenaus_users')
+                                    return !DB::table('crenaus_enseignants')
                                         ->where('user_id', $enseignant->id)
                                         ->where('crenau_id', $crenau->id)
                                         ->exists();
@@ -152,3 +152,4 @@ class GestionHorraireController extends Controller
         }
     }
 }
+

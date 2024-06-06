@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CrenausEnseignants extends Model
 {
     use HasFactory;
-    use HasFactory;
+   
 
     protected $fillable = [
         'crenau_id', 'user_id',
