@@ -140,5 +140,6 @@ Route::group(['middleware' => 'teacher'],function(){
     Route::get('teacher/disponibilite/add', [DisponibiliteController::class, 'add']);
     Route::post('teacher/disponibilite/add', [DisponibiliteController::class, 'insert'])->name('str');
     Route::delete('/delete_disponibilite/{id}', [DisponibiliteController::class, 'destroy'])->name('strdis');
+
 });
 

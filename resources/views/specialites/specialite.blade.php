@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'spécialités')
-
 @section('content')
 
     <!-- Inclure jQuery -->
@@ -83,16 +81,17 @@
                         <td>{{ $s->departement }}</td>
                         <td>{{ $s->niveau }}</td>
                         <td>
-                            {{-- afficher les section --}}
+                            {{-- afficher les sections --}}
                             @foreach ($s->sections as $sec)
-                                <p> Section :
-                                {{$sec->nom}}
-                                @foreach ($sec->groupes as $gr)
-                                    <p>Groupe : {{$gr->nom}} Nombre etudiant : {{$gr->nombre_etudiant}}</p>
+                                <div>
+                                    <p>Section : {{$sec->nom}}</p>
+                                    @foreach ($sec->groupes as $gr)
+                                        <p>Groupe : {{$gr->nom}} Nombre etudiant : {{$gr->nombre_etudiant}}</p>
                                     @endforeach
-                                    </p>
-                                @endforeach
+                                </div>
+                            @endforeach
                         </td>
+
                         <td class="d-flex justify-content-center align-items-center">
                             <a href="/update_formation/{{ $s->id }}" class="btn btn-sm btn-warning mx-2"><i class="fas fa-edit"></i></a>
                             <form id="{{$s->id}}" action="{{route("strformation",$s->id)}}" method="post">

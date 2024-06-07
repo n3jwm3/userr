@@ -35,9 +35,12 @@
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="user-panel" >
-            <img src="{{ asset('assets/homme.png')}}" class="img-circle elevation-1" alt="User Image">
-
-            <a href="#" style="color: #000">{{ Auth::user()->name}}</a>
+            <div style="display: inline-block;">
+                <img src="{{ asset('assets/homme.png')}}" class="img-circle elevation-1" alt="User Image">
+            </div>
+            <div style="display: inline-block; vertical-align: middle; margin-left: 10px;">
+                <h6 style="color: #000; display: inline-block; margin: 0;">{{ Auth::user()->name }}</h6>
+            </div>
             {{-- <a href="{{ url('admin/teacher/' . Auth::user()->id) }}" style="color: #000">{{ Auth::user()->name }}</a>
 --}}
           </a>

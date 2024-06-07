@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier Specialite</title>
 
+@extends('layouts.app')
+@section('content')
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
@@ -18,19 +14,13 @@
 
     <!-- Custom Styles -->
     <style>
-        /* Your custom styles here */
-        /* Example: */
-        /* CSS */
-        /* #id-field {
-             display: none; /* Cacher le champ de l'id */
-
 
         #sec1 {
             margin-top: 20px;
             background: white;
             padding: 20px;
             border-radius: 20px;
-            width: 750px;
+            width: 700px;
             margin-left: 350px;
         }
         .container {
@@ -43,7 +33,7 @@
             padding: 10px 20px;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+
         }
 
         #countries {
@@ -69,36 +59,29 @@
             color: white;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s;
+
         }
 
 
 
     </style>
-</head>
-<body>
 
-@extends('layouts.app')
-
-@section('title', 'Modifier Specialite')
-
-@section('content')
 
     <form action="/update/traitement" method="POST">
 
         @csrf
         <section class="container" id="sec1">
             <div class="text-end" id="hov">
-                <a href="{{ route('specialites.specialite') }}" style="margin-left:700px;">
+                <a href="{{ route('specialites.specialite') }}" style="margin-left:500px;">
                     <i class="fa-solid fa-xmark fa-xl"></i>
                 </a>
             </div>
 
             <div class="row">
-                <div class="col-12 col-md-3">
+                <div class="col-9 col-md-3">
                     <label for="" id="id-field">id:</label>
                 </div>
-                <div class="col-12 col-md-9">
+                <div class="col-10 col-md-9">
                     <input type="text" name="id" id="id-field" value="{{ $spec->id }}" readonly>
                 </div>
             </div>
@@ -168,10 +151,10 @@
                     <p style="text-align: center"><button type="submit" class="btnajouter">Modifier</button></p>
                 </div>
             </div>
+        </section>
     </form>
-    </section>
+
 
 @endsection
 
-</body>
-</html>
+
