@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', 'Local')
-
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/app.css')}}">
 <style>
@@ -33,7 +31,7 @@
            </div>
        </form>
        @include('_message')
-       
+
         <div class="text-end"> <a href="{{ route('local.create') }}" >
 
             <img src="{{ asset('assets/add.png') }}" alt="Description de l'image">

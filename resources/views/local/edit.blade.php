@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
-@section('title', 'Enseignant')
-
+@section('title', ' Local')
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/app.css')}}">
     <style>
@@ -37,19 +35,11 @@
             margin-left: 0;
         }
 
-        #buttmod:hover {
-            background-color: #35dc3b;
-            border-color: #35dc3b;
-        }
 
-        #buttmod:active {
-            background-color: #35dc49;
-            border-color: #35dc49;
-        }
 
         /* Styles pour le lien au survol */
         #hov a {
-            color: #0a53be;
+            color: #036d16;
             text-decoration: none;
         }
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('semestre');
             $table->bigInteger('specialite_id')->constrained()->unsigned();
             $table->foreign('specialite_id')->references("id")
-            ->on("specialites")->onDelete("cascade");
+            ->on("specialites")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

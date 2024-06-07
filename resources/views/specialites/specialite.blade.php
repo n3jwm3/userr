@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'spécialités')
 @section('content')
 
     <!-- Inclure jQuery -->

@@ -1,7 +1,5 @@
 {{--@extends('layouts.app')
-
-@section('title', 'Spécialité')
-
+@section('title','Planing')
 @section('content')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -87,10 +85,8 @@
 @section('styles')
 <link rel="stylesheet" href="/CSS/Module.css">
 @endsection--}}
-@extends('layouts.app')
-
-@section('title', 'Spécialité')
-
+ @extends('layouts.app')
+ @section('title','Planing')
 @section('content')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

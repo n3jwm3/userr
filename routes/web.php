@@ -120,7 +120,7 @@ Route::post('/traitement/cre','App\Http\Controllers\CrenauController@affecter');
 
 
 // la route pour la génération :
-Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning');
+Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning')->name('genererPlanning');
 });
 
 

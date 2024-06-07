@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' Non-disponnibilité')
 @section('content')
  <!-- Content Wrapper. Contains page content -->
 <style>

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Horaires')
 @section('content')
 
 <title>Gestion Planning</title>

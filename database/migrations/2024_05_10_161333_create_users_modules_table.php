@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->constrained()->unsigned()->nullable();
             $table->foreign('user_id')->references("id")
-            ->on("users")->onDelete("cascade")->where('user_type', 2);
+            ->on("users")->onDelete("cascade")->onUpdate("cascade")->where('user_type', 2);
 
             $table->bigInteger('module_id')->constrained()->unsigned();
             $table->foreign('module_id')->references("id")
-            ->on("modules")->onDelete("cascade");
+            ->on("modules")->onDelete("cascade")->onUpdate("cascade");
 
             $table->timestamps();
         });

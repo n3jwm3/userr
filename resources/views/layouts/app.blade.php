@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ !empty($header_title) ? $header_title : ''}}</title>
+ {{--<title>{{ !empty($header_title) ? $header_title : ''}}</title>--}}
+ <title>@yield('title')</title>
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/r-2.2.7/datatables.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -50,12 +51,7 @@
 <script src="{!! URL::asset('plugins/summernote/summernote-bs4.min.js')!!}"></script>
 <script src="{!! URL::asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')!!}"></script>
 <script src="{!! URL::asset('dist/js/adminlte.js')!!}"></script>
-{{--<script src="{!! URL::asset('dist/js/demo.js')!!}"></script>
-<script src="{!! URL::asset('dist/js/pages/dashboard.js')!!}"></script>
-<script src="{!! URL::asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js') !!}"></script>
-<script src="{!! URL::asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js') !!}"></script>
-<script src="{!! URL::asset('https://cdn.datatables.net/v/bs4/dt-1.10.24/b-1.7.0/b-colvis-1.7.0/b-html5-1.7.0/b-print-1.7.0/r-2.2.7/datatables.min.js') !!}"></script>
-<script src="{!! URL::asset('https://cdn.jsdelivr.net/npm/sweetalert2@11.0.12/dist/sweetalert2.all.min.js') !!}"></script>--}}
+
 @include('script')
 @yield('script')
 </body>

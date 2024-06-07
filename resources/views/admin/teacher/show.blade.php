@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' Enseignants')
 @section('styles')
     <style>
         /* Copiez le CSS du deuxième code ici */

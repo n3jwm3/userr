@@ -1,5 +1,5 @@
-
 @extends('layouts.app')
+@section('title', 'spécialités')
 @section('content')
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

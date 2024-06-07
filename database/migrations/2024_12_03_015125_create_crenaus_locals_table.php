@@ -16,9 +16,9 @@ return new class extends Migration
             $table->bigInteger('crenau_id')->constrained()->unsigned();
             $table->bigInteger('local_id')->constrained()->unsigned();
             $table->foreign('crenau_id')->references("id")
-            ->on("crenaus")->onDelete("cascade");
+            ->on("crenaus")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign('local_id')->references("id")
-            ->on("locals")->onDelete("cascade");
+            ->on("locals")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

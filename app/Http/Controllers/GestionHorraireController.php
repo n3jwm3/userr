@@ -152,4 +152,3 @@ class GestionHorraireController extends Controller
         }
     }
 }
-

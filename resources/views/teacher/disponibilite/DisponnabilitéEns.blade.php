@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' Non-disponnibilité')
 @section('content')
         <link rel="stylesheet" href="{{ asset('assets/app.css')}}">
         <link rel="preconnect" href="https://fonts.bunny.net">

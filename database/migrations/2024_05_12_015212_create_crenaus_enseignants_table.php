@@ -16,9 +16,9 @@ return new class extends Migration
             $table->bigInteger('crenau_id')->constrained()->unsigned()->nullable();
             $table->bigInteger('user_id')->constrained()->unsigned()->nullable();
             $table->foreign('user_id')->references("id")
-            ->on("users")->onDelete("cascade")->where('user_type', 2);
+            ->on("users")->onDelete("cascade")->onUpdate("cascade")->where('user_type', 2);
             $table->foreign('crenau_id')->references("id")
-            ->on("crenaus")->onDelete("cascade");
+            ->on("crenaus")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

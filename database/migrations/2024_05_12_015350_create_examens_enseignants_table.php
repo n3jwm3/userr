@@ -17,9 +17,9 @@ return new class extends Migration
            // $table->foreignId('enseignant_id')->constrained()->unsigned();
             $table->bigInteger('user_id')->constrained()->unsigned()->nullable();
             $table->foreign('user_id')->references("id")
-            ->on("users")->onDelete("cascade")->where('user_type', 2);
+            ->on("users")->onDelete("cascade")->onUpdate("cascade")->where('user_type', 2);
             $table->foreign('examen_id')->references("id")
-            ->on("examens")->onDelete("cascade");
+            ->on("examens")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }
