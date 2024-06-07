@@ -1,5 +1,7 @@
 @extends('layouts.app')
+
 @section('title', 'Local')
+
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/app.css')}}">
 <style>
@@ -49,9 +51,10 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>type</th>
                             <th>libelle</th>
                             <th>capacite</th>
-                            <th>type</th>
+
                             <th></th>
                         </tr>
                     </thead>
@@ -59,16 +62,17 @@
                         @foreach ($local as $key => $local)
                             <tr>
                                 <td>{{$key+=1}}</td>
-                                <td>{{$local->libelle}}</td>
-                                <td>{{$local->capacite}}</td>
                                 <td>
                                     @if ($local->type == 'Salle')
-                                  <span >Salle</span>
-                               @elseif ($local->type == 'Amphi')
-                                <span >Amphi</span>
+                                        <span >Salle</span>
+                                    @elseif ($local->type == 'Amphi')
+                                        <span >Amphi</span>
 
-                            @endif
+                                    @endif
                                 </td>
+                                <td>{{$local->libelle}}</td>
+                                <td>{{$local->capacite}}</td>
+
                                 <td class="d-flex justify-content-center align-items-center">
                                     <a href="{{route('local.edit',$local->libelle)}}"
                                         class="btn btn-sm btn-warning mx-2">

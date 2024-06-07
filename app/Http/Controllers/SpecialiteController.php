@@ -16,12 +16,12 @@ class SpecialiteController extends Controller
     public function listespecialite()
     {
         // recuperer la liste des module :
-       $modules = Module::all();
+        $modules = Module::all();
         $specia = Specialite::all();
         $section = Section::all();
         $groupe = Section::all();
-     return view('specialites.specialite',compact('specia','modules','section','groupe'));
-     //  return view('specialites.specialite',compact('specia','section','groupe'));
+        return view('specialites.specialite',compact('specia','modules','section','groupe'));
+        //  return view('specialites.specialite',compact('specia','section','groupe'));
     }
 
 
@@ -107,29 +107,29 @@ class SpecialiteController extends Controller
             'niveau' => 'required',
         ]);
 // Récupérer la spécialité à mettre à jour
-$speci = Specialite::findOrFail($request->id); // Utilisez findOrFail pour obtenir une exception si la spécialité n'est pas trouvée
+        $speci = Specialite::findOrFail($request->id); // Utilisez findOrFail pour obtenir une exception si la spécialité n'est pas trouvée
 
-$speci->nom = $request->nom;
-$speci->departement = $request->departement;
-$speci->niveau = $request->niveau;
-$speci->save();
+        $speci->nom = $request->nom;
+        $speci->departement = $request->departement;
+        $speci->niveau = $request->niveau;
+        $speci->save();
 
 // Mettre à jour les noms de section
-foreach ($request->sections as $sectionId => $sectionNom) {
-    $section = Section::findOrFail($sectionId); // Utilisez findOrFail pour obtenir une exception si la section n'est pas trouvée
-    $section->nom = $sectionNom;
-    $section->save();
-}
+        foreach ($request->sections as $sectionId => $sectionNom) {
+            $section = Section::findOrFail($sectionId); // Utilisez findOrFail pour obtenir une exception si la section n'est pas trouvée
+            $section->nom = $sectionNom;
+            $section->save();
+        }
 
 // Mettre à jour les noms de groupe et le nombre d'étudiants
-foreach ($request->groupes as $sectionId => $groupes) {
-    foreach ($groupes as $groupId => $groupData) {
-        $group = Groupe::findOrFail($groupId); // Utilisez findOrFail pour obtenir une exception si le groupe n'est pas trouvée
-        $group->nom = $groupData['nom'] ?? $group->nom;
-        $group->nombre_etudiant = $groupData['nombre_etudiants'] ?? $group->nombre_etudiant;
-        $group->save();
-    }
-}
+        foreach ($request->groupes as $sectionId => $groupes) {
+            foreach ($groupes as $groupId => $groupData) {
+                $group = Groupe::findOrFail($groupId); // Utilisez findOrFail pour obtenir une exception si le groupe n'est pas trouvée
+                $group->nom = $groupData['nom'] ?? $group->nom;
+                $group->nombre_etudiant = $groupData['nombre_etudiants'] ?? $group->nombre_etudiant;
+                $group->save();
+            }
+        }
 
         return redirect('admin/specialites/list')->with('success','Modification avec succes');
     }

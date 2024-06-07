@@ -3,16 +3,15 @@
 @section('title', 'Enseignant')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/app.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/app.css')}}">
     <style>
         /* Styles CSS */
         #ski {
             border-radius: 15px;
             display: flex;
-            height: 70vh;
+            height: 60vh;
             width: 700px; /* Largeur ajustée pour correspondre à la mise en forme */
-            padding: 0px; /* Ajout de rembourrage */
-            margin-right: 40px;
+            margin-right: 10px;
         }
 
         .card-body {
@@ -21,21 +20,18 @@
             display: flex;
             flex-direction: column; /* Afficher les éléments en colonne */
             justify-content: center;
-            align-items: center;
-            padding: 5px;
             background-color: #ffffff;
-            margin-top: 10px; /* Ajout de marge en haut pour éviter la superposition */
+            margin-top: 5px; /* Ajout de marge en haut pour éviter la superposition */
         }
 
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             display: flex; /* Afficher les éléments de la forme horizontale */
-            align-items: center; /* Centrer verticalement */
         }
 
         .form-control {
-            width: 100%;
-            padding: 8px;
+            width: 120%; /* Augmentation de la largeur */
+            padding: 5px;
             border-radius: 3px;
             border: 1px solid #ccc;
             font-size: 14px; /* Réduire la taille de la police */
@@ -47,7 +43,6 @@
             text-align: right; /* Aligner le texte à droite */
             font-size: 14px; /* Réduire la taille de la police */
         }
-
 
         #aj {
             width: 100%;
@@ -71,7 +66,7 @@
                 </div>
                 <div id="ski">
                     <div class="card-body">
-                        <div class="text-end" id="hov" style="margin-left: 650px;margin-bottom: 25px">
+                        <div class="text-end" id="hov" style="margin-left: 400px;margin-bottom: 25px">
                             <a href="{{route('listte')}}">
                                 <i class="fa-solid fa-xmark fa-xl"></i>
                             </a>
@@ -83,13 +78,13 @@
                                 <div class="col-md-6"> <!-- Première colonne Bootstrap -->
                                     <div class="form-group">
                                         <label class="form-label fw-bold" for="name">Nom:</label>
-                                        <input type="text" name="name" value="{{old("name",$enseignant->name)}}" placeholder="Prénom" class="form-control" id="bordno">
+                                        <input type="text" name="name" value="{{old("name",$enseignant->name)}}" required placeholder="Nom" class="form-control" id="bordno">
                                     </div>
                                 </div>
                                 <div class="col-md-6"> <!-- Deuxième colonne Bootstrap -->
                                     <div class="form-group">
                                         <label for="prenom" class="form-label fw-bold">Prénom:</label>
-                                        <input type="text" name="prenom" value="{{old("prenom",$enseignant->prenom)}}" placeholder="Prénom" class="form-control" id="bordpre">
+                                        <input type="text" name="prenom" value="{{old("prenom",$enseignant->prenom)}}" required placeholder="Prénom" class="form-control" id="bordpre">
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +103,7 @@
                                 <div class="col-md-6"> <!-- Deuxième colonne Bootstrap -->
                                     <div class="form-group">
                                         <label class="form-label fw-bold" for="grade">Grade:</label>
-                                        <input type="text" class="form-control" value="{{old("grade",$enseignant->grade)}}" placeholder="Grade" name="grade" id="borgr">
+                                        <input type="text" class="form-control" value="{{old("grade",$enseignant->grade)}}" required placeholder="Grade" name="grade" id="borgr">
                                     </div>
                                 </div>
                             </div>
@@ -116,23 +111,24 @@
                                 <div class="col-md-6"> <!-- Première colonne Bootstrap -->
                                     <div class="form-group">
                                         <label class="form-label fw-bold" for="password">Mot de passe:</label>
-                                        <input type="text" class="form-control"  name="password"  placeholder="Password">
+                                        <input type="text" class="form-control"  name="password" value="{{old("email",$enseignant->password)}}" required placeholder="Mot de passe">
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-6"> <!-- Deuxième colonne Bootstrap -->
+                                    <div class="form-group d-flex align-items-center">
+                                        <label class="form-label fw-bold" for="email">Email:</label>
+                                        <input type="email" class="form-control" value="{{old("email",$enseignant->email)}}" required placeholder="Email" name="email" id="borem">
+                                    </div>
+                                    <div style="color: red">{{ $errors->first('email')}}</div>
+                                </div>
                             </div>
-                            <div class="form-group mb-2">
-                                <label class="form-label fw-bold" for="email">Email:</label>
-                                <input type="email" style="margin-bottom: 30px" class="form-control" value="{{old("email",$enseignant->email)}}" placeholder="Email" name="email" id="borem">
-                                <div style="color: red">{{ $errors->first('email')}}</div>
-                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-2">
                                     <button type="submit" class="btn btn-dark" id="aj">
-                                        {{ __('  Modification') }}
+                                        {{ __('Modification') }}
                                     </button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -140,9 +136,4 @@
             </div>
         </div>
     </div>
-
 @endsection
-
-
-
-

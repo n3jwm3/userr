@@ -57,16 +57,16 @@
     <div class="card my-2 col-md-12 mx-auto">
         <div class="card-header">
             <h3 class="text-center " >
-                spécialités
+                Spécialités
             </h3>
         </div>
         <div class="card-body" >
             <table id="myTable" class="table table-bordered table-striped table-hover table-responsive-sm">
                 <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nom</th>
-                    <th>Departement</th>
+                    <th>Département</th>
                     <th>Niveau</th>
                     <th>Sections et Groupes</th>
                     <th>Actions</th>
@@ -76,7 +76,7 @@
                 <tbody>
                 @foreach ($specia as $s)
                     <tr>
-                        <td>{{ $s->id }}</td>
+                        <td>{{ $s->id }} </td>
                         <td>{{ $s->nom }}</td>
                         <td>{{ $s->departement }}</td>
                         <td>{{ $s->niveau }}</td>

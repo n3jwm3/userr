@@ -23,7 +23,7 @@
         #to, #to2, #numbor {
             margin-bottom: 5px;
             width: 100%;
-            padding: 10px;
+            padding: 5px;
             border-radius: 5px;
             border: 1px solid #ccc; /* Changement de la couleur de la bordure */
         }
@@ -43,8 +43,6 @@
 
             cursor: pointer;
         }
-
-
 
     </style>
 
@@ -69,7 +67,7 @@
                         <form method="POST" class="mt-3" action="{{ route('local.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="input-group mb-5" id="in">
-                                <input type="text" name="libelle" value="{{ old('libelle') }}" placeholder="Le nom de l'amphi ou la salle" class="form-control" id="to">
+                                <input type="text" name="libelle" value="{{ old('libelle') }}" placeholder="Le nom de l'amphi ou la salle" class="form-control" id="to" required>
                             </div>
                             <div class="form-group mb-5" id="in3">
                                 <select name="type" class="form-control" id="numbor" required>
@@ -81,7 +79,7 @@
                                 </select>
                             </div>
                             <div class="form-group mb-5">
-                                <input type="number" name="capacite" maxlength="3" value="{{ old('capacite') }}" placeholder="Capacité" class="form-control" id="to2">
+                                <input type="number" name="capacite" maxlength="3" value="{{ old('capacite') }}" placeholder="Capacité" class="form-control" id="to2" required>
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-2">

@@ -25,7 +25,7 @@
 
         .form-control {
             width: 100%;
-            padding: 10px;
+            padding: 5px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
@@ -63,17 +63,17 @@
                     <div class="card-body">
                         <div class="text-end" id="hov">
                                 <a href="{{ url('admin/teacher/list')}}">
-                                <i class="fa-solid fa-xmark fa-xl"></i>
+                                <i class="fa-solid fa-xmark fa-xl" style="margin-left: 650px;"></i>
                             </a>
                         </div>
                         <form method="POST" class="mt-3" action="{{ route('inser') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="input-group mb-5" id="in">
-                                <input type="text" name="name" value="{{old("name")}}"  required placeholder="Nom" class="form-control" id="to">
-                                <input type="text" name="prenom" value="{{old("prenom")}}" placeholder="Prenom" class="form-control" id="to2">
+                                <input type="text" name="name" value="{{old("name")}}"  required placeholder="Nom" class="form-control" id="to" >
+                                <input type="text" name="prenom" value="{{old("prenom")}}" required placeholder="Prenom" class="form-control" id="to2" >
                             </div>
                             <div class="form-group mb-5">
-                                <input type="text" class="form-control" value="{{old("grade")}}" placeholder="Grade" name="grade">
+                                <input type="text" class="form-control" value="{{old("grade")}}" required placeholder="Grade" name="grade" >
                                 <select name="type" class="form-control" id="numbor" required>
                                     <option value="" selected disabled>Type</option>
                                     <option value="permanent">Permanent</option>
@@ -84,7 +84,7 @@
 
 
                             <div class="form-group mb-5" id="in4">
-                                <input type="text" class="form-control" value="{{old("password")}}" placeholder="Mot de passe" name="password" id="jp">
+                                <input type="text" class="form-control" value="{{old("password")}}" placeholder="Mot de passe" name="password" id="jp" required>
                             </div>
                             <div class="form-group mb-5">
                                 <input type="email" class="form-control" value="{{old("email")}}" required  placeholder="exemple@gmail.com" name="email" id="mee">

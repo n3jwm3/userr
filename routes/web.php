@@ -74,7 +74,8 @@ Route::group(['middleware' => 'admin'],function(){
     Route::post('/ajouter/traitement', [SpecialiteController::class, 'ajouter_specialite']);
     Route::delete('/delete_formation/{id}', [SpecialiteController::class, 'supprimer_specialite'])->name('strformation');
     Route::get('/update_formation/{id}', [SpecialiteController::class, 'update_specialite']);
-    Route::post('/update/traitement', [SpecialiteController::class, 'update_specialite_traitement']);
+    Route::post('/update/traitement', [SpecialiteController::class, 'update_specialite_traitement'])->name('update.traitement');
+
 
 
 //// route pour afficher les module :
