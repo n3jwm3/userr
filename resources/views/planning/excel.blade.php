@@ -1,19 +1,19 @@
 <table>
     <thead>
     <tr>
-        <th>Date et créneau</th>
+        <th>Dates et créneaux</th>
         <th>Module</th>
         <th>Local</th>
-        <th>Enseignant</th>
+        <th>Enseignants</th>
     </tr>
     </thead>
     <tbody>
     @foreach($examens as $examen)
         <tr>
-            <td>{{ $examen->date_creneau }}</td>
-            <td>{{ $examen->module->nom }}</td>
+            <td>{{ $examen->crenau->date_creneau . ' ' . $examen->crenau->crenaux }}</td>
+            <td>{{ $examen->module->libelle }}</td>
             <td>{{ $examen->local->nom }}</td>
-            <td>{{ $examen->module->enseignant->nom }}</td>
+            <td>{{ $examen->enseignants->pluck('name')->join(', ') }}</td>
         </tr>
     @endforeach
     </tbody>
