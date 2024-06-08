@@ -35,9 +35,18 @@ Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 
 
+Route::get('/planning/excel', [DashbaordController::class, 'exportExcel'])->name('exportExcel');
+Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+
 Route::group(['middleware' => 'admin'],function(){
 
     Route::get('admin/dashbaord', [DashbaordController::class, 'dashbaord']);
+
+    Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+
+
+
+
     Route::get('admin/admin/list', [AdminController::class, 'list']);
     Route::get('admin/admin/add', [AdminController::class, 'add']);
     Route::post('admin/admin/add', [AdminController::class, 'insert']);

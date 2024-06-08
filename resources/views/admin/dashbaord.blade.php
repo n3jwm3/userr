@@ -15,6 +15,17 @@
         #ml {
             margin-top: 20px;
         }
+        .table-head {
+            background-color: #f8f9fa; /* Couleur d'en-tête de tableau */
+        }
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #dee2e6; /* Bordure des cellules */
+        }
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
     </style>
 
     <div class="content-wrapper" id="nij">
@@ -25,7 +36,6 @@
                         <div class="row">
                             <div class="col-lg-3 col-6">
                                 <div class="small-box" id="im">
-                                    {{--<img src="{{ asset('Images/specialite-removebg-preview.png') }}" alt="Description de l'image" >--}}
                                     <div class="icon">
                                         <i class="fas fa-chalkboard-teacher" style="color:#35512f;"></i>
                                     </div>
@@ -40,7 +50,7 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box" id="im">
                                     <div class="inner">
-                                        <h3>{{ \App\Models\specialite::count() }}</h3>
+                                        <h3>{{ \App\Models\Specialite::count() }}</h3>
                                         <p>Spécialités</p>
                                     </div>
                                     <div class="icon">
@@ -71,7 +81,6 @@
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-person" style="color:#35512f;"></i>
-                                        {{-- <div class="bloc"><img src="{{ asset('Images/specialite-removebg-preview.png') }}" alt="Description de l'image" ></div> --}}
                                     </div>
                                     <div class="small-box-footer">Etudiants</div>
                                 </div>
@@ -81,31 +90,30 @@
 
                     <!-- Code for displaying generated timetables -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-                            <table class="table table-bordered" style="margin-top: 50px">
-                                <thead>
-                                <tr class="table-head">
-                                    <td>Libellé de l'emploi du temps</td>
-                                    <td>Version PDF</td>
-                                    <td style="width: 10%">Version Excel</td>
+                        <table class="table table-bordered" style="margin-top: 50px">
+                            <thead>
+                            <tr class="table-head">
+                                <th>Libellé de l'emploi du temps</th>
+                                <th>Version PDF</th>
+                                <th style="width: 10%">Version Excel</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($examens->groupBy('module.specialite.nom') as $specialite => $examenGroup)
+                                <tr>
+                                    <td>Planning d'examen {{ $specialite }}</td>
+                                    <td><a href="{{ route('exportPdf', ['specialite' => $specialite]) }}"><i class="fas fa-file-pdf"></i> PDF</a></td>
+                                    <td>
+                                        <a href="{{ route('exportExcel', ['specialite' => $specialite]) }}"><i class="fas fa-file-excel"></i> Excel</a>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td> texte</td>
-                                        <td>texte</td>
-                                        <td>
-
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div id="pagination">
-                            </div>
-                            <div class="no-data text-center">
-                                <p>Aucun planning généré</p>
-                            </div>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center">Aucun planning généré</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
                     <!-- End of timetable display code -->
 
