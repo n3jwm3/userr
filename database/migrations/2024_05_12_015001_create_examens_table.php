@@ -19,11 +19,11 @@ return new class extends Migration
             $table->bigInteger('local_id')->constrained()->unsigned();
             $table->bigInteger('crenau_id')->constrained()->unsigned();
             $table->foreign('module_id')->references("id")
-            ->on("modules")->onDelete("cascade");
+            ->on("modules")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign('local_id')->references("id")
-            ->on("locals")->onDelete("cascade");
+            ->on("locals")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign('crenau_id')->references("id")
-            ->on("crenaus")->onDelete("cascade");
+            ->on("crenaus")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

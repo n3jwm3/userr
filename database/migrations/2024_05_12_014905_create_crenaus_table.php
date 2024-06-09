@@ -16,7 +16,7 @@ return new class extends Migration
             $table->enum('crenaux', ['08h-10h', '10h-12h', '12h-14h','14h-16h']);
             $table->bigInteger('jour_id')->constrained()->unsigned();
             $table->foreign('jour_id')->references("id")
-            ->on("jours")->onDelete("cascade");
+            ->on("jours")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

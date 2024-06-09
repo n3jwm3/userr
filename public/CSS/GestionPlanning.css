@@ -7,16 +7,21 @@
 
 }
 
-
+#in {
+    display: flex;
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 .container {
-    width: 50%;
+    width: 60%;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
     margin: 0 auto;
     position: relative;
-    background: #35512F;
+    background: white;
 }
 #logo {
     position: absolute;
@@ -28,7 +33,7 @@
 }
 .row {
     display: flex;
-    background: #35512F;
+    background: white;
     flex-wrap: wrap;
     margin-left: -15px; /* Pour compenser la marge négative des colonnes */
     margin-right: -15px; /* Pour compenser la marge négative des colonnes */
@@ -61,20 +66,10 @@
     display: block; /* Fait en sorte que le bouton soit un bloc */
     margin-left: auto; /* Le pousse à droite */
 }
-#nextPageButton {
-    font-weight: 600; /* Met le texte en gras */
-    font-size: 1.2em; /* Augmente la taille du texte */
-    display: block; /* Fait en sorte que le bouton soit un bloc */
-    color:  #35512F; /* Couleur du texte */
-    background: white;
-    border: none; /* Supprime la bordure */
-    border-radius: 20px; /* Arrondit les coins */
-    padding: 15px 30px; /* Ajuste la taille du bouton */
-    cursor: pointer; /* Curseur de type main pour indiquer un élément cliquable */
-}
+
 
 h4{
-    color: white;
+    color: black;
 }
 .container select{
     max-width: 200px; /* Largeur maximale réduite */
@@ -98,7 +93,7 @@ h4{
     border: none;
 }
 
-h2#texte1 {
+h4#texte1 {
     margin-bottom: 50px;
     color: black;
 }

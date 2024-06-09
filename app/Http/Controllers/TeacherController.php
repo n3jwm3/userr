@@ -63,7 +63,7 @@ class TeacherController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        //
+
         $enseignant=  User::where('id', $id)->first();
         $this->validate($request, [
             'name' =>'required',

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' Administrateurs')
 @section('content')
 <style>
      #essay{

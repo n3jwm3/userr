@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', 'spécialités')
-
 @section('content')
 
     <!-- Inclure jQuery -->
@@ -59,16 +57,16 @@
     <div class="card my-2 col-md-12 mx-auto">
         <div class="card-header">
             <h3 class="text-center " >
-                spécialités
+                Spécialités
             </h3>
         </div>
         <div class="card-body" >
             <table id="myTable" class="table table-bordered table-striped table-hover table-responsive-sm">
                 <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nom</th>
-                    <th>Departement</th>
+                    <th>Département</th>
                     <th>Niveau</th>
                     <th>Sections et Groupes</th>
                     <th>Actions</th>
@@ -78,21 +76,22 @@
                 <tbody>
                 @foreach ($specia as $s)
                     <tr>
-                        <td>{{ $s->id }}</td>
+                        <td>{{ $s->id }} </td>
                         <td>{{ $s->nom }}</td>
                         <td>{{ $s->departement }}</td>
                         <td>{{ $s->niveau }}</td>
                         <td>
-                            {{-- afficher les section --}}
+                            {{-- afficher les sections --}}
                             @foreach ($s->sections as $sec)
-                                <p> Section :
-                                {{$sec->nom}}
-                                @foreach ($sec->groupes as $gr)
-                                    <p>Groupe : {{$gr->nom}} Nombre etudiant : {{$gr->nombre_etudiant}}</p>
+                                <div>
+                                    <p>Section : {{$sec->nom}}</p>
+                                    @foreach ($sec->groupes as $gr)
+                                        <p>Groupe : {{$gr->nom}} Nombre etudiant : {{$gr->nombre_etudiant}}</p>
                                     @endforeach
-                                    </p>
-                                @endforeach
+                                </div>
+                            @endforeach
                         </td>
+
                         <td class="d-flex justify-content-center align-items-center">
                             <a href="/update_formation/{{ $s->id }}" class="btn btn-sm btn-warning mx-2"><i class="fas fa-edit"></i></a>
                             <form id="{{$s->id}}" action="{{route("strformation",$s->id)}}" method="post">

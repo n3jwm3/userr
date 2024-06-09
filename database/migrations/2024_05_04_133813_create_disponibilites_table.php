@@ -16,7 +16,8 @@ return new class extends Migration
             $table->date('jour');
             $table->string('crenaux');
             $table->unsignedBigInteger('enseignant_id')->unsigned()->nullable();
-            $table->foreign('enseignant_id')->references('id')->on('users')->onDelete("cascade")->where('user_type', 2);
+            $table->foreign('enseignant_id')->references('id')->on('users')
+            ->onDelete("cascade")->onUpdate("cascade")->where('user_type', 2);
             $table->timestamps();
         });
     }

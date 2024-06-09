@@ -33,6 +33,7 @@
       
     </ul>
     <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="user-panel" >
@@ -44,6 +45,22 @@
         </a>
       </li>
     </ul>
+=======
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="user-panel" >
+            <div style="display: inline-block;">
+                <img src="{{ asset('assets/homme.png')}}" class="img-circle elevation-1" alt="User Image">
+            </div>
+            <div style="display: inline-block; vertical-align: middle; margin-left: 10px;">
+                <h6 style="color: #000; display: inline-block; margin: 0;">{{ Auth::user()->name }}</h6>
+            </div>
+            {{-- <a href="{{ url('admin/teacher/' . Auth::user()->id) }}" style="color: #000">{{ Auth::user()->name }}</a>
+--}}
+          </a>
+        </li>
+      </ul>
+>>>>>>> 538687531b3f49132f3ed7eba8902d6cf1c8b57b
   </nav>
   
   <aside class="main-sidebar sidebar-primary elevation-4" id="ver" >

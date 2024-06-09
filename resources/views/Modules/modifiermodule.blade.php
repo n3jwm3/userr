@@ -1,5 +1,5 @@
-
 @extends('layouts.app')
+@section('title', 'Module')
 @section('content')
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -111,9 +111,9 @@
         <h6 class="text-center" id="mk">  <strong>Ajouter les coordonnées d'un module pour le modifier.</strong> </h6>
     </div>
     <section class="container" id="sec1">
-        <div class="text-end" id="hov">
-            <a href="{{ route('Modules.module') }}">
-                <i class="fa-solid fa-xmark fa-xl"></i>
+        <div class="text-end" id="hov" >
+            <a href="{{ route('Modules.module') }}" >
+                <i class="fa-solid fa-xmark fa-xl" style="margin-left: 600px;"></i>
             </a>
         </div>
         <form action="/updatemodule/traitement" method="post">
@@ -123,7 +123,7 @@
                     <label for="">id:</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input  type="text" name="id" value="{{$mo->id}}" readonly>
+                    <input  type="text" name="id" value="{{$mo->id}}" readonly required>
                 </div>
             </div>
             <div class="row">
@@ -131,7 +131,7 @@
                     <label for="">Libelle:</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input  type="text" name="libelle" value="{{$mo->libelle}}">
+                    <input  type="text" name="libelle" value="{{$mo->libelle}}" required>
                 </div>
             </div>
             <div class="row">
@@ -139,7 +139,7 @@
                     <label for="">Semestre:</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <input  type="text" name="semestre" value="{{$mo->semestre}}">
+                    <input  type="text" name="semestre" value="{{$mo->semestre}}" required>
                 </div>
             </div>
             <div class="row">
@@ -147,7 +147,7 @@
                     <label for="">Specialite:</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <select name="specialite_id" id="">
+                    <select name="specialite_id" id="" required>
                         @foreach ($sp as $s)
                             <option value="{{$s->id}}">{{$s->nom}} {{$s->niveau}}</option>
                         @endforeach
@@ -159,10 +159,10 @@
                     <label for="">Les chargés:</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <select name="user_id[]" id="countries" multiple style="width: 200px">
+                    <select name="user_id[]" id="countries" multiple style="width: 200px" required>
                         @foreach ($ens as $ens)
                         @if ($ens->user_type === 2)
-                            <option value="{{$ens->id}}" {{ in_array($ens->id, $enseignants_module) ? 'selected' : '' }}>{{$ens->nom}} {{$ens->prenom}}</option>
+                            <option value="{{$ens->id}}" {{ in_array($ens->id, $enseignants_module) ? 'selected' : '' }}>{{$ens->name}}{{$ens->prenom}} </option>
                             @endif
                         @endforeach
                     </select>

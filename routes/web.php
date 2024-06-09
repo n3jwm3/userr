@@ -35,9 +35,18 @@ Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 
 
+Route::get('/planning/excel', [DashbaordController::class, 'exportExcel'])->name('exportExcel');
+Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+
 Route::group(['middleware' => 'admin'],function(){
 
     Route::get('admin/dashbaord', [DashbaordController::class, 'dashbaord']);
+
+    Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+
+
+
+
     Route::get('admin/admin/list', [AdminController::class, 'list']);
     Route::get('admin/admin/add', [AdminController::class, 'add']);
     Route::post('admin/admin/add', [AdminController::class, 'insert']);
@@ -74,7 +83,8 @@ Route::group(['middleware' => 'admin'],function(){
     Route::post('/ajouter/traitement', [SpecialiteController::class, 'ajouter_specialite']);
     Route::delete('/delete_formation/{id}', [SpecialiteController::class, 'supprimer_specialite'])->name('strformation');
     Route::get('/update_formation/{id}', [SpecialiteController::class, 'update_specialite']);
-    Route::post('/update/traitement', [SpecialiteController::class, 'update_specialite_traitement']);
+    Route::post('/update/traitement', [SpecialiteController::class, 'update_specialite_traitement'])->name('update.traitement');
+
 
 
 //// route pour afficher les module :
@@ -120,7 +130,7 @@ Route::post('/traitement/cre','App\Http\Controllers\CrenauController@affecter');
 
 
 // la route pour la génération :
-Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning');
+Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning')->name('genererPlanning');
 });
 
 // la route pour afficher la vue periode :
@@ -152,5 +162,6 @@ Route::group(['middleware' => 'teacher'],function(){
     Route::get('teacher/disponibilite/add', [DisponibiliteController::class, 'add']);
     Route::post('teacher/disponibilite/add', [DisponibiliteController::class, 'insert'])->name('str');
     Route::delete('/delete_disponibilite/{id}', [DisponibiliteController::class, 'destroy'])->name('strdis');
+
 });
 

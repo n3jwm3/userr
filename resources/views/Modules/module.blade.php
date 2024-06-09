@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Module')
 @section('content')
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -44,7 +45,7 @@
                     <th>Libellé</th>
                     <th>Spécialite</th>
                     <th>Semestre</th>
-                    <th>Charge</th>
+                    <th>Chargé du module</th>
                     <th>Actions</th>
                 </tr>
 
@@ -54,12 +55,12 @@
                 <tr>
                     <td>{{ $m->id }}</td>
                     <td>{{ $m->libelle }}</td>
-                    <td>{{ $m->specialite->nom }}</td>
+                    <td>{{ $m->specialite->nom}} </td>
                     <td>{{ $m->semestre }}</td>
                     <td>
                        @foreach ($m->users as $e)
                             <ul>
-                                <ol>{{$e->name}}</ol>
+                                <ol>{{$e->name}} {{ $e->prenom}}</ol>
                             </ul>
                         @endforeach
 
@@ -160,17 +161,17 @@
                 <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
                     <div class="form-group">
                         <label style="margin-right: 120px">Libelle : </label>
-                        <input type="text" name="libelle" >
+                        <input type="text" name="libelle" required>
                     </div>
                     <div class="form-group">
                         <label style="margin-right: 100px">Semestre : </label>
-                        <input type="text" name="semestre">
+                        <input type="text" name="semestre" required>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <label >La Spécialite</label>
                             <div class="select2-wrapper" style="margin-top: 10px">
-                                <select name="specialite_id" id="" style="width: 100%">
+                                <select name="specialite_id" id="" style="width: 100%" required>
                                     @foreach ($spec as $s)
                                         <option value="{{$s->id}}">{{$s->nom}} {{$s->niveau}}</option>
                                     @endforeach
@@ -181,7 +182,7 @@
                     <div class="form-group">
                         <label >Les chargés</label>
                         <div class="select2-wrapper" style="margin-top: 10px">
-                            <select name="user_id[]" id="countries" multiple style="overflow: auto">
+                            <select name="user_id[]" id="countries" multiple style="overflow: auto" required>
                                 @foreach ($ens as $e)
                                 @if ($e->user_type === 2)
                                 <option value="{{$e->id}}">{{$e->name}} {{$e->prenom}}</option>

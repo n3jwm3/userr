@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,6 +13,7 @@ use App\Models\Section;
 use App\Models\Specialite;
 use APP\Models ;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class GestionHorraireController extends Controller
 {
@@ -87,6 +87,7 @@ class GestionHorraireController extends Controller
     
     private function findAvailableLocals($crenau, $locaux, $module, $groupes, &$localCapacities)
     {
+<<<<<<< HEAD
         // Récupérer tous les enregistrements de la table crenaus_locals pour le créneau donné
         $occupiedLocals = \DB::table('crenaus_locals')->where('crenau_id', $crenau->id)->pluck('local_id')->toArray();
         
@@ -95,6 +96,11 @@ class GestionHorraireController extends Controller
         $selectedLocals = []; // Liste des locaux sélectionnés
         
         // Boucle à travers chaque local pour vérifier s'il est disponible et a suffisamment de capacité
+=======
+        $occupiedLocals = DB::table('crenaus_locals')->where('crenau_id', $crenau->id)->pluck('local_id')->toArray();
+        $selectedLocals = [];
+
+>>>>>>> 538687531b3f49132f3ed7eba8902d6cf1c8b57b
         foreach ($locaux as $local) {
             if ($localCapacities[$local->id] > 0 && !in_array($local->id, $occupiedLocals)) {
                 $selectedLocals[] = $local; // Ajouter le local à la liste des locaux disponibles
@@ -119,10 +125,17 @@ class GestionHorraireController extends Controller
         while (true) {
             // Vérifier la disponibilité des enseignants responsables pour le créneau donné
             $responsableDisponible = $responsablesModule->first(function ($responsable) use ($crenau) {
+<<<<<<< HEAD
                 return !\DB::table('crenaus_users')
                 ->where('user_id', $responsable->id)
                 ->where('crenau_id', $crenau->id)
                 ->exists();
+=======
+                return !DB::table('crenaus_enseignants')
+                    ->where('user_id', $responsable->id)
+                    ->where('crenau_id', $crenau->id)
+                    ->exists();
+>>>>>>> 538687531b3f49132f3ed7eba8902d6cf1c8b57b
             });
             
             // Si un responsable est disponible, procéder à la planification
@@ -152,10 +165,17 @@ class GestionHorraireController extends Controller
                             } else {
                                 // Choisir l'enseignant avec le moins de surveillances parmi ceux disponibles
                                 $responsableId = $enseignants->filter(function ($enseignant) use ($crenau) {
+<<<<<<< HEAD
                                     return !\DB::table('crenaus_users')
                                     ->where('user_id', $enseignant->id)
                                     ->where('crenau_id', $crenau->id)
                                     ->exists();
+=======
+                                    return !DB::table('crenaus_enseignants')
+                                        ->where('user_id', $enseignant->id)
+                                        ->where('crenau_id', $crenau->id)
+                                        ->exists();
+>>>>>>> 538687531b3f49132f3ed7eba8902d6cf1c8b57b
                                 })->sortByDesc(function ($enseignant) use ($enseignantSurveillances) {
                                     return $enseignantSurveillances[$enseignant->id] ?? 0;
                                 })->last()->id;
