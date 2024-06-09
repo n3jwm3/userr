@@ -36,7 +36,9 @@ Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 
 
 Route::get('/planning/excel', [DashbaordController::class, 'exportExcel'])->name('exportExcel');
-Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+//Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+Route::get('/export-pdf/{specialite}', 'DashbaordController@exportPdf')->name('exportPdf');
+
 
 Route::group(['middleware' => 'admin'],function(){
 

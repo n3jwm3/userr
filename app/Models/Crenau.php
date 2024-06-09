@@ -19,6 +19,7 @@ class Crenau extends Model
         return $this->belongsTo(Jour::class);
     }
 
+
     public function examens()
     {
         return $this->hasMany(Examen::class);

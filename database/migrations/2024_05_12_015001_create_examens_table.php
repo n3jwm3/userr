@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-    * Run the migrations.
-    */
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('examens', function (Blueprint $table) {
@@ -19,18 +19,18 @@ return new class extends Migration
             $table->bigInteger('local_id')->constrained()->unsigned();
             $table->bigInteger('crenau_id')->constrained()->unsigned();
             $table->foreign('module_id')->references("id")
-            ->on("modules")->onDelete("cascade")->onUpdate("cascade");
+                ->on("modules")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign('local_id')->references("id")
-            ->on("locals")->onDelete("cascade")->onUpdate("cascade");
+                ->on("locals")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign('crenau_id')->references("id")
-            ->on("crenaus")->onDelete("cascade")->onUpdate("cascade");
+                ->on("crenaus")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }
 
     /**
-    * Reverse the migrations.
-    */
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('examens');

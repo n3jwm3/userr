@@ -30,6 +30,7 @@ class Examen extends Model
         return $this->belongsToMany(User::class,'examens_users');
     }
 
+
     // relation avec local :
     public function local()
     {

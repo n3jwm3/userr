@@ -2,25 +2,40 @@
 <html>
 <head>
     <title>Planning</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 <h1>Planning des examens</h1>
-<table border="1">
+<table>
     <thead>
     <tr>
-        <th>Date et créneau</th>
+        <th>Date</th>
+        <th>Créneau</th>
         <th>Module</th>
         <th>Local</th>
-        <th>Enseignant</th>
+        <th>Enseignants</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($examens as $examen)
+    @foreach($pdfData as $examen)
         <tr>
-            <td>{{ $examen->date_creneau }}</td>
-            <td>{{ $examen->module->nom }}</td>
-            <td>{{ $examen->local->nom }}</td>
-            <td>{{ $examen->module->enseignant->nom }}</td>
+            <td>{{ $examen['date'] }}</td>
+            <td>{{ $examen['creneau'] }}</td>
+            <td>{{ $examen['module'] }}</td>
+            <td>{{ $examen['local'] }}</td>
+            <td>{{ $examen['enseignants'] }}</td>
         </tr>
     @endforeach
     </tbody>
