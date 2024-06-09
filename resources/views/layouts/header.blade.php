@@ -2,7 +2,7 @@
   <style>
     #nij{
       background-color: #FEF5E7;
-      
+
     }
     #ver{
       background-color:#35512f;
@@ -11,41 +11,31 @@
       border-bottom-right-radius: 30px;
       margin-top: 10px;
     }
-    
+
     #texte{
-      
+
       color: #FEF5E7
     }
     #texte:hover {
       background-color:#FEF5E7;
       color: #000;
-      
+
     }
-    
+
   </style>
-  
+
   <nav class="main-header navbar navbar-expand navbar-white navbar-light" id="nij">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
+
     </ul>
     <ul class="navbar-nav ml-auto">
-<<<<<<< HEAD
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="user-panel" >
-          <img src="{{ asset('assets/homme.png')}}" class="img-circle elevation-1" alt="User Image">
-          
-          <a href="#" style="color: #000">{{ Auth::user()->name}}</a>
-          {{-- <a href="{{ url('admin/teacher/' . Auth::user()->id) }}" style="color: #000">{{ Auth::user()->name }}</a>
-          --}}
-        </a>
-      </li>
-    </ul>
-=======
+
+
+
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="user-panel" >
@@ -60,17 +50,16 @@
           </a>
         </li>
       </ul>
->>>>>>> 538687531b3f49132f3ed7eba8902d6cf1c8b57b
   </nav>
-  
+
   <aside class="main-sidebar sidebar-primary elevation-4" id="ver" >
     <!-- Brand Logo -->
     <a href="javascript:;" class="brand-link" style="text-align: center">
-      
+
       <span class="brand-text font-weight-light">
         <img src="{{ asset('dist/img/menu.png')}}"  alt="User Image"></span>
       </a>
-      
+
       <!-- Sidebar -->
       <div class="sidebar" id="ver">
         <nav class="mt-2">
@@ -137,7 +126,7 @@
                 </p>
               </a>
             </li>
-            
+
             <li class="nav-item" id="texte">
               <a href="{{url('admin/admin/list')}}" class="nav-link" id="texte">
                 <i class="nav-icon far fa-user"></i>
@@ -146,7 +135,7 @@
                 </p>
               </a>
             </li>
-            
+
             @elseif(Auth::user()->user_type == 2)
             <li class="nav-item" id="texte">
               <a href="{{url('teacher/dashbaord')}}" class="nav-link" id="texte">
@@ -164,7 +153,7 @@
                 </p>
               </a>
             </li>
-            
+
             @endif
             <li class="nav-item" id="texte">
               <a href="{{url('logout')}}" class="nav-link" id="texte">
@@ -174,12 +163,11 @@
                 </p>
               </a>
             </li>
-            
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
     </aside>
-    
-    
+

@@ -28,7 +28,7 @@ class ExportDataToExcel implements FromCollection, WithHeadings
             $dateCreneau = $firstExam->crenau->jour->jour . ' ' . $firstExam->crenau->crenaux;
 
             // On suppose que tous les examens pour un module ont les mêmes attributs (local, enseignants, etc.)
-            $enseignants = $firstExam->enseignants->pluck('name')->join(', ');
+            $enseignants = $firstExam->users->pluck('name')->join(', ');
 
             // Récupérer le libellé et le type du local
             $local = $firstExam->local->libelle . ' (' . $firstExam->local->type . ')';

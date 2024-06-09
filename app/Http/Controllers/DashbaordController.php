@@ -17,7 +17,7 @@ class DashbaordController extends Controller
     {
         $data['header_title'] = 'Acceuil';
 
-        $examens = Examen::with(['module.specialite', 'local', 'crenau', 'enseignants'])->get(); // Récupérer tous les examens sans pagination
+        $examens = Examen::with(['module.specialite', 'local', 'crenau', 'users'])->get(); // Récupérer tous les examens sans pagination
         $data['examens'] = $examens;
 
         if (Auth::user()->user_type == 1) {
@@ -29,7 +29,7 @@ class DashbaordController extends Controller
 
     public function exportPdf()
     {
-        $examens = Examen::with(['module', 'local', 'crenau.jour', 'enseignants'])->get();
+        $examens = Examen::with(['module', 'local', 'crenau.jour', 'users'])->get();
 
         $pdfData = collect();
         $modulesAffiches = [];
@@ -44,7 +44,7 @@ class DashbaordController extends Controller
                 $date = optional(optional($examen->crenau)->jour)->jour;
                 $creneau = optional($examen->crenau)->crenaux;
                 $local = optional($examen->local)->nom;
-                $enseignants = $examens->where('module_id', $moduleId)->pluck('enseignants')->flatten()->pluck('name')->unique()->join(', ');
+                $enseignants = $examens->where('module_id', $moduleId)->pluck('users')->flatten()->pluck('name')->unique()->join(', ');
 
                 $pdfDataRow = [
                     'module' => $module,
@@ -53,7 +53,6 @@ class DashbaordController extends Controller
                     'date' => $date,
                     'creneau' => $creneau,
                 ];
-
                 $pdfData->push($pdfDataRow);
             }
         }
@@ -78,7 +77,7 @@ class DashbaordController extends Controller
             $examens = Examen::whereHas('module.specialite', function ($query) use ($specialite) {
                 $query->where('nom', $specialite);
             })
-                ->with(['module', 'local', 'crenau', 'crenau.jour', 'enseignants'])
+                ->with(['module', 'local', 'crenau', 'crenau.jour', 'users'])
                 ->get();
 
             $excelFileName = 'planning_' . str_replace(' ', '_', $specialite) . '.xlsx';

@@ -106,86 +106,91 @@
         }
     </style>
 
-<div class="main" style="background: #FEF5E7">
-    <div>
-        <h6 class="text-center" id="mk">  <strong>Ajouter les coordonnées d'un module pour le modifier.</strong> </h6>
+    <div class="main" style="background: #FEF5E7">
+        <div>
+            <h6 class="text-center" id="mk">  <strong>Ajouter les coordonnées d'un module pour le modifier.</strong> </h6>
+        </div>
+        <section class="container" id="sec1">
+            <div class="text-end" id="hov" >
+                <a href="{{ route('Modules.module') }}" >
+                    <i class="fa-solid fa-xmark fa-xl" style="margin-left: 600px;"></i>
+                </a>
+            </div>
+            <form action="/updatemodule/traitement" method="post">
+                @csrf
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <label for="">id:</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input  type="text" name="id" value="{{$mo->id}}" readonly required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <label for="">Libelle:</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input  type="text" name="libelle" value="{{$mo->libelle}}" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-3">
+
+                        <label class="form-label fw-bold" for="semestre">Semestre:</label>
+                        <select name="semestre" class="form-control" id="bornum" required>
+                            <option value="" disabled>Semestre:</option>
+                            <option {{ $mo->semestre === "1" ? "selected" : "" }} value="1">1</option>
+                            <option {{$mo->semestre === "2" ? "selected" : "" }} value="2">2</option>
+
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <label for="">Specialite:</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select name="specialite_id" id="" required>
+                            @foreach ($sp as $s)
+                                <option value="{{$s->id}}">{{$s->nom}} {{$s->niveau}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <label for="">Les chargés:</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select name="user_id[]" id="countries" multiple style="width: 200px" required>
+                            @foreach ($ens as $ens)
+                                @if ($ens->user_type === 2)
+                                    <option value="{{$ens->id}}" {{ in_array($ens->id, $enseignants_module) ? 'selected' : '' }}>{{$ens->name}}{{$ens->prenom}} </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p style="text-align: center"><button type="submit" class="btnajouter" id="buttmod">Modifier</button></p>
+                    </div>
+                </div>
+            </form>
+        </section>
+        @if (session('status'))
+            <div class="alert success">
+                {{ session('status') }}
+            </div>
+        @endif
+        <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+        <script>
+            new MultiSelectTag('countries')
+        </script>
+        <script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
     </div>
-    <section class="container" id="sec1">
-        <div class="text-end" id="hov" >
-            <a href="{{ route('Modules.module') }}" >
-                <i class="fa-solid fa-xmark fa-xl" style="margin-left: 600px;"></i>
-            </a>
-        </div>
-        <form action="/updatemodule/traitement" method="post">
-            @csrf
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <label for="">id:</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input  type="text" name="id" value="{{$mo->id}}" readonly required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <label for="">Libelle:</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input  type="text" name="libelle" value="{{$mo->libelle}}" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <label for="">Semestre:</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <input  type="text" name="semestre" value="{{$mo->semestre}}" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <label for="">Specialite:</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <select name="specialite_id" id="" required>
-                        @foreach ($sp as $s)
-                            <option value="{{$s->id}}">{{$s->nom}} {{$s->niveau}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <label for="">Les chargés:</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <select name="user_id[]" id="countries" multiple style="width: 200px" required>
-                        @foreach ($ens as $ens)
-                        @if ($ens->user_type === 2)
-                            <option value="{{$ens->id}}" {{ in_array($ens->id, $enseignants_module) ? 'selected' : '' }}>{{$ens->name}}{{$ens->prenom}} </option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <p style="text-align: center"><button type="submit" class="btnajouter" id="buttmod">Modifier</button></p>
-                </div>
-            </div>
-        </form>
-    </section>
-    @if (session('status'))
-        <div class="alert success">
-            {{ session('status') }}
-        </div>
-    @endif
-    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
-    <script>
-        new MultiSelectTag('countries')
-    </script>
-    <script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
-</div>
 @endsection
 
 

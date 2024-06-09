@@ -13,10 +13,7 @@ class Module extends Model
         'semsetre',
     ];
 
-    public function specialite()
-    {
-        return $this->belongsTo(Specialite::class);
-    }
+
 
     // focntion pour relier au enseignant :
     public function users()
@@ -28,6 +25,11 @@ class Module extends Model
     public function examens()
     {
         return $this->hasMany(Examen::class);
+    }
+
+    public function specialite()
+    {
+        return $this->belongsTo(Specialite::class);
     }
 
 }

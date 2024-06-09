@@ -16,9 +16,9 @@ return new class extends Migration
             $table->bigInteger('examen_id')->constrained()->unsigned();
             $table->bigInteger('groupe_id')->constrained()->unsigned();
             $table->foreign('groupe_id')->references("id")
-            ->on("groupes")->onDelete("cascade")->onUpdate("cascade");
+                ->on("groupes")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign('examen_id')->references("id")
-            ->on("examens")->onDelete("cascade")->onUpdate("cascade");
+                ->on("examens")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

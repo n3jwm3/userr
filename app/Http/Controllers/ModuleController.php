@@ -25,7 +25,7 @@ class ModuleController extends Controller
     {
         $request->validate([
             'libelle' => 'required',
-            'semestre'=> 'required',
+            'semestre' =>['required' ,'in:1,2'],
             'specialite_id' => 'required',
         ]);
         // recuperer les donne :
@@ -40,14 +40,14 @@ class ModuleController extends Controller
         $user_id = $request->input('user_id');
         $module_id = $module->id;
         if (!is_null($user_id)) {
-        foreach ($user_id as $id) {
+            foreach ($user_id as $id) {
 
 
-            $emm = new UsersModules();
-            $emm->user_id = $id;
-            $emm->module_id = $module_id;
-            $emm->save();
-        }
+                $emm = new UsersModules();
+                $emm->user_id = $id;
+                $emm->module_id = $module_id;
+                $emm->save();
+            }
         }
 
         return redirect('Modules/module')->with('success','Ajouter avec succes');
@@ -72,7 +72,7 @@ class ModuleController extends Controller
     {
         $sp = Specialite::all(); // Récupérer les spécialités
         $mo = Module::find($id);
-        $enseignants_module = $mo->enseignants->pluck('id')->toArray(); // Récupérer les enseignants associés à ce module
+        $enseignants_module = $mo->users->pluck('id')->toArray(); // Récupérer les enseignants associés à ce module
         $ens = User::all(); // Renommer la variable pour éviter tout conflit
         return view('Modules.modifiermodule', compact('mo', 'sp', 'ens', 'enseignants_module'));
     }
@@ -84,7 +84,7 @@ class ModuleController extends Controller
     {
         $request->validate([
             'libelle' => 'required',
-            'semestre' => 'required',
+            'semestre' =>['required' ,'in:1,2'],
             'specialite_id' => 'required',
         ]);
 
@@ -100,8 +100,8 @@ class ModuleController extends Controller
         // Mettre à jour les chargés de module associés
         $user_ids = $request->input('user_id', []);
 
-     // Par défaut, tableau vide si aucun enseignant sélectionné
-        $mod->enseignants()->sync($user_ids); // Met à jour les enseignants associés au module
+        // Par défaut, tableau vide si aucun enseignant sélectionné
+        $mod->users()->sync($user_ids); // Met à jour les enseignants associés au module
 
         return redirect('/Modules/module')->with('success', 'Modification avec succès');
     }
@@ -116,7 +116,7 @@ class ModuleController extends Controller
         $mod = Module::where(function($query) use ($search){
             $query->where('libelle','like',"%$search%");
         })
-        ->get();
+            ->get();
 
         return view('Modules.module',compact('mod','search'));
     }

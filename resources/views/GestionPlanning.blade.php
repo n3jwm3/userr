@@ -6,42 +6,27 @@
     <link rel="stylesheet" href="/CSS/GestionPlanning.css">
     <style>
         /* Styles spécifiques pour les champs de saisie et les sélecteurs */
-        #in, #to2, #numbor {
+        .form-group {
             display: flex;
-            margin-top: 5px;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 90%;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
-        #to, #to2, #numbor {
-            margin-bottom: 5px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #ffffff;
-            width: 100%; /* Ajustement de la largeur */
-        }
-        #todt{
-            margin-bottom: 5px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #ffffff;
-            width: 60%; /* Ajustement de la largeur */
+        .form-group label {
+            flex: 0 0 150px; /* Ajuster la largeur des labels selon vos besoins */
+            margin-bottom: 0;
+            margin-right: 10px;
         }
 
-
-
-        /* Nouveau style pour le select de durée */
-        #duréeRow select {
-            margin-bottom: 5px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #ffffff;
-            width: 100%; /* Ajustement de la largeur */
+        .form-group select,
+        .form-group input {
+            flex-grow: 1; /* Pour occuper tout l'espace restant de la ligne */
+            border: 1px solid #ccc; /* Ajout de la bordure */
+            padding: 8px; /* Ajout du padding pour l'espace intérieur */
+            border-radius: 5px; /* Ajout du border-radius pour les coins arrondis */
+            box-sizing: border-box; /* Pour inclure la bordure et le padding dans la largeur */
         }
+
         #nextPageButton {
             width: 100%;
             padding: 10px;
@@ -52,92 +37,49 @@
             color: white;
             cursor: pointer;
         }
+
+        /* Ajustement pour empêcher le défilement horizontal */
+        body {
+            overflow-x: hidden;
+        }
     </style>
 
-    <div style="margin-bottom: 100px">
+    <div style="margin-bottom: 50px">
         <h3 id="texte1" style="text-align: center">Veuillez sélectionner les informations relatives à votre emploi du temps</h3>
     </div>
-<<<<<<< HEAD
-    <form action="/generer/traitement" method="post">
-        @csrf
-        <div class="row">
-            <div class="col-sm-12 col-md-6" >
-                <h3>Session :</h3>
-                <select id="session" name="sessionn">
-                    <option value="Normale">Normale</option>
-                    <option value="Remplacement">Remplacement</option>
-                    <option value="Rattrapage">Rattrapage</option>
-                </select>
-                <br>
-                <h3>Spécialité/filière</h3>
-                <select id="formation" name="formationn">
-                    @foreach ($spec as $s)
-                    <option value="{{$s->id}}">{{$s->nom}} {{$s->niveau}}</option>
-                    @endforeach
-                </select>
-                <br>
-                <h3>Semestre</h3>
-                <select name="semestre" id="">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-            </div>
-            
-        </div>
-        <button type="submit" id="nextPageButton" onclick="window.location.href=''" style="margin-top: 30px">Génerer un planning </button>
-    </form>
-    <a href="planning">Voir planning</a>
-    
-</div>
-=======
-    <div class="container" id="container" style="margin-top: 50px">
-        <div style="margin-bottom: 80px">
-            <img id="logo" src="{{ asset('Images/fond_de_site-removebg-preview.png') }}" alt="Logo">
-        </div>
-        <form action="/traitement/cre" method="post">
+    <div class="container">
+        <form action="/generer/traitement" method="post">
             @csrf
             <div class="row">
-                <div class="col-md-6"> <!-- Colonne 1 -->
-                    <h4>Session </h4>
-                    <select id="to" name="session">
-                        <option value="1">Normale</option>
-                        <option value="2">Remplacement</option>
-                        <option value="3">Rattrapage</option>
-                    </select>
-                    <h4>Spécialité </h4>
-                    <select id="to" name="formation">
-                        @foreach ($spec as $s)
-                            <option value="{{$s->id}}">{{$s->nom}} {{$s->niveau}}</option>
-                        @endforeach
-                    </select>
-                    <h4>Semestre</h4>
-                    <select id="to" name="semestre">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-                <div class="col-md-6"> <!-- Colonne 2 -->
-                    <div class="row">
-                        <h4 style="margin-right: 50px;">Date début</h4>
-                        <input type="date" id="todt" name="datedebut">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="session">Session</label>
+                        <select id="session" name="sessionn" class="form-control">
+                            <option value="Normale">Normale</option>
+                            <option value="Remplacement">Remplacement</option>
+                            <option value="Rattrapage">Rattrapage</option>
+                        </select>
                     </div>
-                    <div class="row">
-                        <h4 style="margin-right: 50px;">Date Fin</h4>
-                        <input type="date" id="todt" name="datefin">
+                    <div class="form-group">
+                        <label for="formation">Spécialité</label>
+                        <select id="formation" name="formationn" class="form-control">
+                            @foreach ($spec as $s)
+                                <option value="{{$s->id}}">{{$s->nom}} {{$s->niveau}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="row" id="duréeRow"> <!-- Nouvelle row pour la durée -->
-                        <h4 style="margin-right: 150px;">Durée                       </h4>
-                        <select name="duree">
-                            <option value="1">1h</option>
-                            <option value="1.5">1h30min</option>
-                            <option value="2">2h</option>
+                    <div class="form-group">
+                        <label for="semestre">Semestre</label>
+                        <select name="semestre" id="semestre" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
                         </select>
                     </div>
                 </div>
             </div>
-            <button type="submit" id="nextPageButton" style="text-decoration-color: white">Génerer le planning </button>
+            <button type="submit" id="nextPageButton" class="btn-modifier" style="margin-top: 30px">Génerer le planning</button>
         </form>
-        <a href="GestionHoraire">Aller à la page de génération</a>
+
     </div>
->>>>>>> 538687531b3f49132f3ed7eba8902d6cf1c8b57b
+
 @endsection

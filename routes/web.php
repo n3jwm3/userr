@@ -42,6 +42,13 @@ Route::get('/export-pdf/{specialite}', 'DashbaordController@exportPdf')->name('e
 
 Route::group(['middleware' => 'admin'],function(){
 
+    // la route pour supprimer le planning apres avoir generer :
+
+    Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprimer_planning');
+
+// la route pour valider le planning
+    Route::get('/valider_planning','App\Http\Controllers\PlanningController@valider_planning');
+
     Route::get('admin/dashbaord', [DashbaordController::class, 'dashbaord']);
 
     Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');

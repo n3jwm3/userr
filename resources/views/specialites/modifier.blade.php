@@ -21,7 +21,7 @@
             padding: 20px;
             border-radius: 20px;
             width: 700px;
-            margin-left: 350px;
+            margin-left: 450px;
         }
         .container {
             margin-bottom: 50px;
@@ -72,7 +72,7 @@
         @csrf
         <section class="container" id="sec1">
             <div class="text-end" id="hov">
-                <a href="{{ route('specialites.specialite') }}" style="margin-left:500px;">
+                <a href="{{ route('specialites.specialite') }}" style="margin-left:600px;">
                     <i class="fa-solid fa-xmark fa-xl"></i>
                 </a>
             </div>
@@ -146,7 +146,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="margin-top: 20px">
                 <div class="col-12">
                     <p style="text-align: center"><button type="submit" class="btnajouter">Modifier</button></p>
                 </div>
