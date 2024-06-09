@@ -170,12 +170,17 @@
                             <input type="text" name="libelle" required>
                         </div>
                         <div class="form-group">
+                            <div class="row">
+                                <label >Le semestre</label>
+                                <div class="select2-wrapper" style="margin-top: 10px">
                             <select name="semestre" class="form-control" id="numbor" required>
-                                <option value="" selected disabled>semestre</option>
+                                <option value="" selected disabled>Semestre</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                             </select>
+                                </div>
 
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="row">

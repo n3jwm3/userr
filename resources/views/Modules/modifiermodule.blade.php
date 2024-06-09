@@ -134,17 +134,21 @@
                         <input  type="text" name="libelle" value="{{$mo->libelle}}" required>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" >
                     <div class="col-12 col-md-3">
 
                         <label class="form-label fw-bold" for="semestre">Semestre:</label>
-                        <select name="semestre" class="form-control" id="bornum" required>
+                    </div>
+                    <div class="col-12 col-md-9">
+
+                    <select name="semestre" class="form-control" id="bornum" required>
                             <option value="" disabled>Semestre:</option>
                             <option {{ $mo->semestre === "1" ? "selected" : "" }} value="1">1</option>
                             <option {{$mo->semestre === "2" ? "selected" : "" }} value="2">2</option>
 
                         </select>
                     </div>
+
 
                 </div>
                 <div class="row">
@@ -173,7 +177,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-top: 20px">
                     <div class="col-12">
                         <p style="text-align: center"><button type="submit" class="btnajouter" id="buttmod">Modifier</button></p>
                     </div>

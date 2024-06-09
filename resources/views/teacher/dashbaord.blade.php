@@ -2,56 +2,45 @@
 @section('title','Accueil')
 @section('content')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap"
-          rel="stylesheet"/>
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
     <style>
         #essay{
             margin-left: 250px;
             margin-top: 10px;
             width: calc(100% - 250px);
-
             background-color: #FEF5E7;
         }
-
         #nij{
             background-color: #FEF5E7;
         }
         #header {
-            background-color: #38512F; /* Changer la couleur de fond en vert */
-            width: calc(100% - 14.08rem); /* Calculer la largeur en soustrayant
-      la largeur de la barre de menu */
+            background-color: #38512F;
+            width: calc(100% - 14.08rem);
             float: right;
             height: 70px;
-
         }
         #body {
-            background-color: #FEF5E7; /* Changer la couleur de fond de l'interface en #FEF5E7 */
+            background-color: #FEF5E7;
         }
         .page-container {
-            min-height: 100vh; /* Hauteur minimum de la page pour occuper toute la fenêtre */
+            min-height: 100vh;
             display: flex;
-            justify-content: center; /* Alignement horizontal au centre */
-            align-items: center; /* Alignement vertical au centre */
+            justify-content: center;
+            align-items: center;
         }
         .box {
             width: 600px;
             height: 500px;
-            /* Spécifie une bordure de 2
-                                     pixels de large, solide et rouge */
-            position: absolute; /* Position absolue par rapport au corps */
-            top: 65%; /* Place le haut de la boîte à 50% de la hauteur du corps */
-            left: 60%; /* Place la gauche de la boîte à 50% de la largeur du corps */
+            position: absolute;
+            top: 65%;
+            left: 60%;
             text-align: center;
-            transform: translate(-50%, -50%); /* Centre la boîte horizontalement et verticalement */
+            transform: translate(-50%, -50%);
             border-radius: 15px;
             text-decoration-color: #35512F;
-
         }
         #animated-text {
             margin-top:50px;
@@ -60,15 +49,14 @@
             font-family: Arial, sans-serif;
             color: #35512F;
             overflow: hidden;
-            font-weight: bold; /* Met le texte en gras */
+            font-weight: bold;
         }
-
         .table-head {
-            background-color: #f8f9fa; /* Couleur d'en-tête de tableau */
+            background-color: #f8f9fa;
         }
         .table-bordered th,
         .table-bordered td {
-            border: 1px solid #dee2e6; /* Bordure des cellules */
+            border: 1px solid #dee2e6;
         }
         .table thead th {
             vertical-align: bottom;
@@ -90,7 +78,7 @@
                     <h4>Saisissez votre non-disponibilité, consultez vos emplois du temps des examens.</h4>
                 </div>
 
-                <!-- Tableau statique des plannings -->
+                <!-- Tableau des plannings générés -->
                 <table class="table table-bordered" style="margin-top: 50px">
                     <thead>
                     <tr class="table-head">
@@ -100,15 +88,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Planning d'examen Informatique</td>
-                        <td><a href="#"><i class="fas fa-file-pdf"></i> PDF</a></td>
-                        <td><a href="#"><i class="fas fa-file-excel"></i> Excel</a></td>
-                    </tr>
-
+                    @forelse($examens->groupBy('module.specialite.nom') as $specialite => $examenGroup)
+                        <tr>
+                            <td>Planning d'examen {{ $specialite }}</td>
+                            <td><a href="{{ route('exportPdf', ['specialite' => $specialite]) }}"><i class="fas fa-file-pdf"></i> PDF</a></td>
+                            <td><a href="{{ route('exportExcel', ['specialite' => $specialite]) }}"><i class="fas fa-file-excel"></i> Excel</a></td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center">Aucun planning généré</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
-                <!-- Fin du tableau statique des plannings -->
+                <!-- Fin du tableau des plannings générés -->
 
             </div>
 

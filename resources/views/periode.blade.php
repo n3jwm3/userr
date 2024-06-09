@@ -51,5 +51,6 @@
             padding: 10px;
             margin-left: 0;
         }
+
     </style>
 @endsection

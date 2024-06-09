@@ -32,10 +32,16 @@ class Examen extends Model
 
 
     // relation avec local :
+
+
+    // relation avec local :
+    // Relation avec local : un examen a un seul local
     public function local()
     {
         return $this->belongsTo(Local::class);
     }
+
+
 
     // le relier avec groupe :
     public function groupes()

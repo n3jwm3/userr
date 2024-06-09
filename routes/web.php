@@ -42,6 +42,9 @@ Route::get('/export-pdf/{specialite}', 'DashbaordController@exportPdf')->name('e
 
 Route::group(['middleware' => 'admin'],function(){
 
+    Route::get('/planning/excel', [DashbaordController::class, 'exportExcel'])->name('exportExcel');
+//Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+    Route::get('/export-pdf/{specialite}', 'DashbaordController@exportPdf')->name('exportPdf');
     // la route pour supprimer le planning apres avoir generer :
 
     Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprimer_planning');
@@ -163,7 +166,11 @@ Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprime
 
 Route::group(['middleware' => 'teacher'],function(){
 
+
+
+
     Route::get('teacher/dashbaord', [DashbaordController::class, 'dashbaord']);
+    Route::get('/export/{specialite}', 'DashbaordController@exportPdf')->name('exportPdf');
 
 
     //Disponibilite url

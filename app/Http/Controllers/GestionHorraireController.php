@@ -36,6 +36,7 @@ class GestionHorraireController extends Controller
         $modules = Module::where('specialite_id', $specialite)->where('semestre', $semestre)->get();
 
 
+
         // trouver les groupes d'une spécialite :
         // trouver les section d'une specialite :
         $section_ids = Section::where('specialite_id',$specialite)->pluck('id');
@@ -78,6 +79,8 @@ class GestionHorraireController extends Controller
                 echo "Aucun créneau disponible pour le module " . $module->id . "\n";
             }
         }
+
+
         $examen = Examen::all();
         $modules = Module::where('specialite_id',$specialite)->get();
         return view('planning',compact('examen','modules','specialite'));
@@ -97,11 +100,26 @@ class GestionHorraireController extends Controller
         foreach ($locaux as $local) {
             if ($localCapacities[$local->id] > 0 && !in_array($local->id, $occupiedLocals)) {
                 $selectedLocals[] = $local; // Ajouter le local à la liste des locaux disponibles
+
+                // Insérer l'association dans la table pivot crenaos_locals
+                \DB::table('crenaus_locals')->insert([
+                    'crenau_id' => $crenau->id,
+                    'local_id' => $local->id,
+                ]);
+
+                // Mettre à jour la capacité restante du local
+                $localCapacities[$local->id] -= $totalNbEtud;
+
+                // Arrêter la boucle si la capacité est suffisante
+                if ($localCapacities[$local->id] >= $totalNbEtud) {
+                    break;
+                }
             }
         }
 
         return $selectedLocals; // Retourner les locaux disponibles
     }
+
 
 
     private function planExamen($module, $crenau, $locauxDisponibles, $groupes, &$localCapacities, &$localEnseignants, &$enseignantSurveillances,$session)
