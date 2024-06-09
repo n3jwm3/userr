@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('users_modules', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->constrained()->unsigned()->nullable();
+
+            $table->bigInteger('user_id')->constrained()->unsigned();
             $table->foreign('user_id')->references("id")
-            ->on("users")->onDelete("cascade")->where('user_type', 2);
+            ->on("users")->onDelete("cascade");
 
             $table->bigInteger('module_id')->constrained()->unsigned();
             $table->foreign('module_id')->references("id")
             ->on("modules")->onDelete("cascade");
-
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enseignants_modules');
+        Schema::dropIfExists('users_modules');
     }
 };

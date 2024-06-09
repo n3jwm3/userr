@@ -19,7 +19,7 @@ class Module extends Model
     }
 
     // focntion pour relier au enseignant :
-    public function enseignants()
+    public function users()
     {
         return $this->belongsToMany(User::class,'users_modules');
     }

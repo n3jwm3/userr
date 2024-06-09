@@ -74,12 +74,12 @@
 @section('script')
 <script>
     $(document).ready(function () {
-        $('#myTable').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-            'copy', 'excel', 'csv', 'pdf', 'print'
-            ]
-        });
+    $('#myTable').DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+    'copy', 'excel', 'csv', 'pdf', 'print'
+    ]
+    });
     });
 </script>
 @endsection
@@ -126,7 +126,7 @@
                 @foreach ($locals as $localName => $examsInLocal)
                 @php
                 $crenauxList = $examsInLocal->pluck('crenau')->unique('crenaux');
-                $uniqueSurveillants = $examsInLocal->pluck('enseignants')->flatten()->unique('id');
+                $uniqueSurveillants = $examsInLocal->pluck('users')->flatten()->unique('id');
                 @endphp
                 <tr>
                     @if ($loop->first)
@@ -155,6 +155,13 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div>
+        <form action="/delete_planning" method="post">
+            @csrf
+            <button type="submit">Supprimer</button>
+            <button>Valider</button>
+        </form>
     </div>
 </div>
 

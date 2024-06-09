@@ -11,8 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 class LocalController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    * Display a listing of the resource.
+    */
     public function index()
     {
         //
@@ -21,19 +21,19 @@ class LocalController extends Controller
             'local' =>$local
         ]);
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     */
+    * Show the form for creating a new resource.
+    */
     public function create()
     {
         //
         return view('local.create');
     }
-
+    
     /**
-     * Store a newly created resource in storage.
-     */
+    * Store a newly created resource in storage.
+    */
     use AuthorizesRequests, ValidatesRequests;
     public function store(Request $request)
     {
@@ -42,9 +42,9 @@ class LocalController extends Controller
             'libelle' =>'required',
             'capacite' => 'required',
             'type' =>['required' ,'in:Salle,Amphi'],
-
-
-
+            
+            
+            
         ]);
         $data = $request->except(['_token']);
         local::create($data);
@@ -52,7 +52,7 @@ class LocalController extends Controller
             "success" => "Ajouter avec succes"
         ]);
     }
-
+    
     public function edit(string $id)
     {
         //
@@ -61,10 +61,10 @@ class LocalController extends Controller
             "local" =>  $local
         ]);
     }
-
+    
     /**
-     * Update the specified resource in storage.
-     */
+    * Update the specified resource in storage.
+    */
     public function update(Request $request, string $id)
     {
         //
@@ -73,8 +73,8 @@ class LocalController extends Controller
             'libelle' =>'required',
             'capacite' => 'required',
             'type' =>['required' ,'in:Salle,Amphi'],
-
-
+            
+            
         ]);
         $data = $request->except(['_token', '_method']);
         $local->update($data);
@@ -82,11 +82,11 @@ class LocalController extends Controller
             "success" => "Modification avec succes"
         ]);
     }
-
+    
     /**
-     * Remove the specified resource from storage.
-     */
-
+    * Remove the specified resource from storage.
+    */
+    
     public function destroy(string $id)
     {
         //
@@ -97,19 +97,19 @@ class LocalController extends Controller
         ]);
     }
     public function import_excel_local()
-{
-    //import_excel_local
-    return view('local.index');
-}
-public function import_excel_local_post(Request $request)
-   {
-    $request->validate([
-        'excel-file' => 'required|file|mimes:xlsx,xls,csv',
-    ]);
-       Excel::import(new LocalImport,$request->file('excel-file'));
-       return redirect()->route("local.index")->with([
-        "success" => "Importation avec succes"
-    ]);
-
-   }
+    {
+        //import_excel_local
+        return view('local.index');
+    }
+    public function import_excel_local_post(Request $request)
+    {
+        $request->validate([
+            'excel-file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+        Excel::import(new LocalImport,$request->file('excel-file'));
+        return redirect()->route("local.index")->with([
+            "success" => "Importation avec succes"
+        ]);
+        
+    }
 }

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('crenaus_locals', function (Blueprint $table) {
             $table->id();
+
             $table->bigInteger('crenau_id')->constrained()->unsigned();
-            $table->bigInteger('local_id')->constrained()->unsigned();
             $table->foreign('crenau_id')->references("id")
             ->on("crenaus")->onDelete("cascade");
+
+            $table->bigInteger('local_id')->constrained()->unsigned();
             $table->foreign('local_id')->references("id")
             ->on("locals")->onDelete("cascade");
             $table->timestamps();

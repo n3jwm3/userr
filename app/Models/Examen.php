@@ -25,9 +25,9 @@ class Examen extends Model
     }
 
     // relation avec ensieignant :
-    public function enseignants()
+    public function users()
     {
-        return $this->belongsToMany(User::class,'examens_enseignants');
+        return $this->belongsToMany(User::class,'examens_users');
     }
 
     // relation avec local :

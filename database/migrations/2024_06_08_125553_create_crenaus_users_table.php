@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('crenaus_enseignants', function (Blueprint $table) {
+        Schema::create('crenaus_users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('crenau_id')->constrained()->unsigned()->nullable();
-            $table->bigInteger('user_id')->constrained()->unsigned()->nullable();
-            $table->foreign('user_id')->references("id")
-            ->on("users")->onDelete("cascade")->where('user_type', 2);
+
+            $table->bigInteger('crenau_id')->constrained()->unsigned();
             $table->foreign('crenau_id')->references("id")
             ->on("crenaus")->onDelete("cascade");
+
+            $table->bigInteger('user_id')->constrained()->unsigned();
+            $table->foreign('user_id')->references("id")
+            ->on("users")->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('crenaus_enseignants');
+        Schema::dropIfExists('crenaus_users');
     }
 };

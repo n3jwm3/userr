@@ -123,6 +123,18 @@ Route::post('/traitement/cre','App\Http\Controllers\CrenauController@affecter');
 Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning');
 });
 
+// la route pour afficher la vue periode :
+Route::get('periode','App\Http\Controllers\PeriodeController@affperiode');
+
+// la route pour supprimer le planning apres avoir generer :
+
+Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprimer_planning');
+
+
+
+
+
+
 
 
 

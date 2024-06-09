@@ -16,11 +16,21 @@ class Crenau extends Model
     public function jour()
     {
         //return $this->belongsTo(Jour::class);
-        return $this->belongsTo(Jour::class, 'jour_id');
+        return $this->belongsTo(Jour::class);
     }
 
     public function examens()
     {
         return $this->hasMany(Examen::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function locals()
+    {
+        return $this->belongsToMany(Local::class);
     }
 }

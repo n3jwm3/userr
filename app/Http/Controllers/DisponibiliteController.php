@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\CrenausEnseignants;
+use App\Models\CrenausUsers;
 use App\Models\Crenau;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +14,7 @@ class DisponibiliteController extends Controller
     public function list()
     {
         $currentUser = Auth::user();
-        $data['getRecord'] = CrenausEnseignants::with('crenau.jour') // Include related models
+        $data['getRecord'] = CrenausUsers::with('crenau.jour') // Include related models
         ->where('user_id', $currentUser->id)
         ->orderBy('id', 'desc')
         ->get();
@@ -40,7 +40,7 @@ class DisponibiliteController extends Controller
           //  'crenaux' => ['required', 'array'], // Mettre 'crenaux' comme un tableau
            // 'crenaux.*' => ['in:8h-10h,10h-12h,12h-14h,14h-16h'], // Chaque élément de 'crenaux' doit être dans cette liste
        // ]);
-        $save = new CrenausEnseignants;
+        $save = new CrenausUsers;
        // $save->jour =  trim($request->jour);
         //$save['crenaux'] = implode(',', $request->crenaux);
         $save->crenau_id = $request->crenau_id;
@@ -51,7 +51,7 @@ class DisponibiliteController extends Controller
     }
     public function destroy(string $id)
     {
-        $disponibilite = CrenausEnseignants::findOrFail($id);
+        $disponibilite = CrenausUsers::findOrFail($id);
         $disponibilite->delete();
         return redirect()->route('lo')->with([
             "success" => "supprimier avec succes"

@@ -57,7 +57,7 @@
                     <td>{{ $m->specialite->nom }}</td>
                     <td>{{ $m->semestre }}</td>
                     <td>
-                       @foreach ($m->enseignants as $e)
+                       @foreach ($m->users as $e)
                             <ul>
                                 <ol>{{$e->name}}</ol>
                             </ul>
