@@ -35,7 +35,7 @@
                 @foreach ($locals as $localName => $examsInLocal)
                 @php
                 $crenauxList = $examsInLocal->pluck('crenau')->unique('crenaux');
-                $uniqueSurveillants = $examsInLocal->pluck('enseignants')->flatten()->unique('id');
+                $uniqueSurveillants = $examsInLocal->pluck('users')->flatten()->unique('id');
                 @endphp
                 <tr>
                     @if ($loop->first)
@@ -50,13 +50,13 @@
                     <td>
                         @foreach ($examsInLocal as $examen)
                         @foreach ($examen->groupes as $groupe)
-                        {{ $groupe->nom }}
+                        {{ $groupe->nom }}<br>
                         @endforeach
                         @endforeach
                     </td>
                     <td>
                         @foreach ($uniqueSurveillants as $enseignant)
-                        {{ $enseignant->nom }}<br>
+                        {{ $enseignant->name }}<br>
                         @endforeach
                     </td>
                 </tr>
@@ -65,25 +65,53 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <form action="/delete_planning" method="post">
+            @csrf
+            <button type="submit">Supprimer</button>
+        </form>
+        <form action="/valider_planning" method="get">
+            @csrf
+            <button type="submit">Valider</button>
+        </form>
+    </div>
 </div>
-
-@endsection
 
 @section('script')
 <script>
     $(document).ready(function () {
-    $('#myTable').DataTable({
-    dom: 'Bfrtip',
-    buttons: [
-    'copy', 'excel', 'csv', 'pdf', 'print'
-    ]
-    });
+        $('#myTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'excel', 'csv', 'pdf', 'print'
+            ]
+        });
     });
 </script>
-@endsection
+@if ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+            });
+        </script>
+    @endif
+     @if(session()->has("success"))
+     <script>
+         Swal.fire({
+             position: 'top-end',
+             icon: 'success',
+             title: "{{session()->get('success')}}",
+             showConfirmButton: false,
+             timer: 3500
+         });
+     </script>
+ @endif
 
-@section('styles')
-<link rel="stylesheet" href="/CSS/Module.css">
+    @stop
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
 @endsection--}}
 @extends('layouts.app')
 @section('title','Planing')
@@ -153,32 +181,53 @@
             </table>
         </div>
         <div>
+
             <form action="/delete_planning" method="post">
                 @csrf
+                @foreach ($modules as $m)
+                    <input type="hidden" name="ids[]" value="{{ $m->id }}">
+                @endforeach
                 <button type="submit">Supprimer</button>
             </form>
+
             <form action="/valider_planning" method="get">
                 @csrf
                 <button type="submit">Valider</button>
             </form>
         </div>
     </div>
-
-@endsection
-
-@section('script')
-    <script>
-        $(document).ready(function () {
-            $('#myTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'csv', 'pdf', 'print'
-                ]
+    @section('script')
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'excel', 'csv', 'pdf', 'print'
+                    ]
+                });
             });
-        });
-    </script>
-@endsection
+        </script>
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                });
+            </script>
+        @endif
+        @if(session()->has("success"))
+            <script>
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{{session()->get('success')}}",
+                    showConfirmButton: false,
+                    timer: 3500
+                });
+            </script>
+        @endif
 
-@section('styles')
-    <link rel="stylesheet" href="/CSS/Module.css">
+    @stop
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 @endsection

@@ -35,29 +35,17 @@ Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 
 
-Route::get('/planning/excel', [DashbaordController::class, 'exportExcel'])->name('exportExcel');
-//Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
-Route::get('/export-pdf/{specialite}', 'DashbaordController@exportPdf')->name('exportPdf');
+
 
 
 Route::group(['middleware' => 'admin'],function(){
 
-    Route::get('/planning/excel', [DashbaordController::class, 'exportExcel'])->name('exportExcel');
-//Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
-    Route::get('/export-pdf/{specialite}', 'DashbaordController@exportPdf')->name('exportPdf');
-    // la route pour supprimer le planning apres avoir generer :
 
-    Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprimer_planning');
+    Route::get('admin/dashbaord', [DashbaordController::class, 'dashbaord'])->name('plsab');
 
-// la route pour valider le planning
-    Route::get('/valider_planning','App\Http\Controllers\PlanningController@valider_planning');
-
-    Route::get('admin/dashbaord', [DashbaordController::class, 'dashbaord']);
-
-    Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
-
-
-
+    // route pour supprimer planning dans le dashbord :
+    //Route::get('/supp_traitement','App\Http\Controllers\DashbaordController@supprimerplanning');
+    Route::post('/supp_traitement', [DashbaordController::class, 'supprimerplanning'])->name('supprimerplanning');
 
     Route::get('admin/admin/list', [AdminController::class, 'list']);
     Route::get('admin/admin/add', [AdminController::class, 'add']);
@@ -85,8 +73,8 @@ Route::group(['middleware' => 'admin'],function(){
     Route::delete('admin/teacher/delete/{id}', [TeacherController::class, 'delete'])->name('dest');
     Route::get('admin/teacher/{id}', [TeacherController::class, 'show'])->name('sho')->middleware('auth');
     //route importer enseignants
- Route::get('import-excel', [TeacherController::class, 'import_excel']);
- Route::post('import-excel', [TeacherController::class, 'import_excel_post']);
+    Route::get('import-excel', [TeacherController::class, 'import_excel']);
+    Route::post('import-excel', [TeacherController::class, 'import_excel_post']);
 
 
     //specialite url
@@ -100,49 +88,49 @@ Route::group(['middleware' => 'admin'],function(){
 
 
 //// route pour afficher les module :
-Route::get('/Modules/module','App\Http\Controllers\ModuleController@listemodule') ->name('Modules.module');
+    Route::get('/Modules/module','App\Http\Controllers\ModuleController@listemodule') ->name('Modules.module');
 // la route pour ajouter des module :
-Route::post('/add/traitement','App\Http\Controllers\ModuleController@ajouter_module');
+    Route::post('/add/traitement','App\Http\Controllers\ModuleController@ajouter_module');
 // pour la supression d'un module :
-Route::delete('/delete_module/{id}','App\Http\Controllers\ModuleController@supprimer_mod')->name('strmodule');
+    Route::delete('/delete_module/{id}','App\Http\Controllers\ModuleController@supprimer_mod')->name('strmodule');
 // la route pour afficher la vue de update :
-Route::get('/update_module/{id}','App\Http\Controllers\ModuleController@update_mod');
+    Route::get('/update_module/{id}','App\Http\Controllers\ModuleController@update_mod');
 // effectuer la modification des modules :
-Route::post('/updatemodule/traitement','App\Http\Controllers\ModuleController@modifier_module');
+    Route::post('/updatemodule/traitement','App\Http\Controllers\ModuleController@modifier_module');
 // la route pour inserer un module :
-Route::post('/add/traitement','App\Http\Controllers\ModuleController@ajouter_module');
+    Route::post('/add/traitement','App\Http\Controllers\ModuleController@ajouter_module');
 
 // pour la supression d'un module :
-Route::get('/delete_module/{id}','App\Http\Controllers\ModuleController@supprimer_mod');
+    Route::get('/delete_module/{id}','App\Http\Controllers\ModuleController@supprimer_mod');
 
 // la route pour la recherche d'un module
-Route::get('/search','App\Http\Controllers\ModuleController@search');
+    Route::get('/search','App\Http\Controllers\ModuleController@search');
 
 
 //url locaux
-Route::resource('local',LocalController::class);
+    Route::resource('local',LocalController::class);
 
- //route importer salles
- Route::get('import_excel_local', [LocalController::class, 'import_excel_local']);
- Route::post('import_excel_local', [LocalController::class, 'import_excel_local_post']);
+    //route importer salles
+    Route::get('import_excel_local', [LocalController::class, 'import_excel_local']);
+    Route::post('import_excel_local', [LocalController::class, 'import_excel_local_post']);
 
 
- //lien de bachir de algo
- Route::get('/GestionPlanning', [\App\Http\Controllers\GestionplanningController::class, 'index'])->name('GestionPlanning');
-Route::get('/GestionHoraire', [\App\Http\Controllers\GestionHorraireController::class, 'index'])->name('GestionHoraire');
+    //lien de bachir de algo
+    Route::get('/GestionPlanning', [\App\Http\Controllers\GestionplanningController::class, 'index'])->name('GestionPlanning');
+    Route::get('/GestionHoraire', [\App\Http\Controllers\GestionHorraireController::class, 'index'])->name('GestionHoraire');
 // la route pour afficher le planning pour examen :
-Route::get('planning','App\Http\Controllers\PlanningController@afficherplanning')->name('planning');
+    Route::get('planning','App\Http\Controllers\PlanningController@afficherplanning')->name('planning');
 
 
 // la route pour la génération
- Route::post('/generation/traitement','App\Http\Controllers\GestionplanningController@gererexamen');
+    Route::post('/generation/traitement','App\Http\Controllers\GestionplanningController@gererexamen');
 
 // traitement pour plusieurs affectation :
-Route::post('/traitement/cre','App\Http\Controllers\CrenauController@affecter');
+    Route::post('/traitement/cre','App\Http\Controllers\CrenauController@affecter');
 
 
 // la route pour la génération :
-Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning')->name('genererPlanning');
+    Route::post('/generer/traitement','App\Http\Controllers\GestionHorraireController@genererPlanning')->name('genererPlanning');
 });
 
 // la route pour afficher la vue periode :
@@ -152,8 +140,17 @@ Route::get('periode','App\Http\Controllers\PeriodeController@affperiode');
 
 Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprimer_planning');
 
+//yasmin
 
 
+// la route pour supprimer le planning apres avoir generer :
+
+Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprimer_planning');
+
+// la route pour valider le planning
+Route::get('/valider_planning','App\Http\Controllers\PlanningController@valider_planning');
+Route::get('/planning/pdf', [DashbaordController::class, 'exportPdf'])->name('exportPdf');
+Route::get('/planning/excel', [DashbaordController::class, 'exportExcel'])->name('exportExcel');
 
 
 
@@ -165,14 +162,9 @@ Route::post('/delete_planning','App\Http\Controllers\PlanningController@supprime
 
 
 Route::group(['middleware' => 'teacher'],function(){
-
-
-
-
+    Route::get('/planing/pdf', [DashbaordController::class, 'exportPdf'])->name('exporPdf');
     Route::get('teacher/dashbaord', [DashbaordController::class, 'dashbaord']);
-    Route::get('/export/{specialite}', 'DashbaordController@exportPdf')->name('exportPdf');
-
-
+    Route::get('/planniens/excel', [DashbaordController::class, 'exportExcel'])->name('exporExcel');
     //Disponibilite url
     Route::get('teacher/disponibilite/list', [DisponibiliteController::class, 'list'])->name('lo');
     Route::get('teacher/disponibilite/add', [DisponibiliteController::class, 'add']);
@@ -180,4 +172,3 @@ Route::group(['middleware' => 'teacher'],function(){
     Route::delete('/delete_disponibilite/{id}', [DisponibiliteController::class, 'destroy'])->name('strdis');
 
 });
-

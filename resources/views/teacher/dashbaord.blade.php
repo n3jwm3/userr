@@ -91,8 +91,8 @@
                     @forelse($examens->groupBy('module.specialite.nom') as $specialite => $examenGroup)
                         <tr>
                             <td>Planning d'examen {{ $specialite }}</td>
-                            <td><a href="{{ route('exportPdf', ['specialite' => $specialite]) }}"><i class="fas fa-file-pdf"></i> PDF</a></td>
-                            <td><a href="{{ route('exportExcel', ['specialite' => $specialite]) }}"><i class="fas fa-file-excel"></i> Excel</a></td>
+                            <td><a href="{{ route('exporPdf', ['specialite' => $specialite]) }}"><i class="fas fa-file-pdf"></i> PDF</a></td>
+                            <td><a href="{{ route('exporExcel', ['specialite' => $specialite]) }}"><i class="fas fa-file-excel"></i> Excel</a></td>
                         </tr>
                     @empty
                         <tr>

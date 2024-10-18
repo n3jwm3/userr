@@ -5,7 +5,6 @@ namespace App\Http\Controllers ;
 use Illuminate\Http\Request ;
 use App\Models\Specialite ;
 use App\Models\Module;
-use App\Models\EnseignantsModules;
 use App\Models\Section;
 use App\Models\Groupe;
 use App\Models\UsersModules;
@@ -80,6 +79,8 @@ class SpecialiteController extends Controller
         // supprimer dans la table section ou specialite_id = id :
         Section::whereIn('specialite_id',$specialite)->delete();
 
+        // supprimer les module de cette specialite :
+        Module::whereIn('specialite_id',$specialite)->delete();
 
 
         $specialite->delete();

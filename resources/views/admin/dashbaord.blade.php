@@ -95,7 +95,9 @@
                             <tr class="table-head">
                                 <th>Libellé de l'emploi du temps</th>
                                 <th>Version PDF</th>
+
                                 <th style="width: 10%">Version Excel</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -103,17 +105,24 @@
                                 <tr>
                                     <td>Planning d'examen {{ $specialite }}</td>
                                     <td><a href="{{ route('exportPdf', ['specialite' => $specialite]) }}"><i class="fas fa-file-pdf"></i> PDF</a></td>
-
                                     <td>
                                         <a href="{{ route('exportExcel', ['specialite' => $specialite]) }}"><i class="fas fa-file-excel"></i> Excel</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('supprimerplanning') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="specialite" value="{{ $specialite }}">
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">Aucun planning généré</td>
+                                    <td colspan="4" class="text-center">Aucun planning généré</td>
                                 </tr>
                             @endforelse
                             </tbody>
+
                         </table>
                     </div>
                     <!-- End of timetable display code -->
@@ -122,4 +131,39 @@
             </div>
         </div>
     </div>
+    @section('script')
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'excel', 'csv', 'pdf', 'print'
+                    ]
+                });
+            });
+        </script>
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                });
+            </script>
+        @endif
+        @if(session()->has("success"))
+            <script>
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{{session()->get('success')}}",
+                    showConfirmButton: false,
+                    timer: 3500
+                });
+            </script>
+        @endif
+
+    @stop
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
 @endsection

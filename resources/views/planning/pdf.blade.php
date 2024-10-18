@@ -18,27 +18,29 @@
 </head>
 <body>
 <h1>Planning des examens</h1>
+
 <table>
     <thead>
     <tr>
-        <th>Date</th>
-        <th>Créneau</th>
+        <th>Dates et créneaux</th>
         <th>Module</th>
         <th>Local</th>
+        <th>Groupes</th>
         <th>Enseignants</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($pdfData as $examen)
+    @foreach($data as $item)
         <tr>
-            <td>{{ $examen['date'] }}</td>
-            <td>{{ $examen['creneau'] }}</td>
-            <td>{{ $examen['module'] }}</td>
-            <td>{{ $examen['local'] }}</td>
-            <td>{{ $examen['enseignants'] }}</td>
+            <td>{{ $item['dates_creneaux'] }}</td>
+            <td>{{ $item['module'] }}</td>
+            <td>{{ $item['local'] }}</td>
+            <td>{{ $item['groupes'] }}</td>
+            <td>{{ $item['enseignants'] }}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
+
 </body>
 </html>

@@ -51,6 +51,32 @@
             padding: 10px;
             margin-left: 0;
         }
-
     </style>
+    @section('script')
+
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                });
+            </script>
+        @endif
+        @if(session()->has("success"))
+            <script>
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{{session()->get('success')}}",
+                    showConfirmButton: false,
+                    timer: 3500
+                });
+            </script>
+
+        @endif
+
+    @stop
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
 @endsection

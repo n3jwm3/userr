@@ -40,6 +40,8 @@ class CrenauController extends Controller
             $debut->addDay();
         }
 
-        return response()->json(['message' => 'Créneaux assignés avec succès pour la période donnée!']);
+
+        return redirect('periode')->with('success', 'Créneaux assignés avec succès pour la période donnée!');
+
     }
 }

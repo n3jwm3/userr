@@ -15,49 +15,8 @@ class ExportDataToExcel implements FromCollection, WithHeadings
 
     public function collection()
     {
-        // Grouper les examens par module pour s'assurer que chaque module est listé une seule fois
-        $groupedExamens = $this->examens->groupBy('module.libelle');
-
-        // Préparer les données pour le fichier Excel
-        $data = [];
-        foreach ($groupedExamens as $module => $exams) {
-            // On prend seulement le premier examen de chaque module
-            $firstExam = $exams->first();
-
-            // On récupère la date et le créneau de l'examen
-            $dateCreneau = $firstExam->crenau->jour->jour . ' ' . $firstExam->crenau->crenaux;
-
-            // On suppose que tous les examens pour un module ont les mêmes attributs (local, enseignants, etc.)
-            $enseignants = $firstExam->users->pluck('name')->join(', ');
-
-            // Récupérer le libellé et le type du local
-            $local = $firstExam->local->libelle . ' (' . $firstExam->local->type . ')';
-
-            // Vérifier si le local a des groupes associés
-            if ($firstExam->local->groupes) {
-                // Récupérer les groupes affectés à ce local avec leurs sections
-                $groupes = $firstExam->local->groupes->map(function ($groupe) {
-                    return $groupe->nom . ' (' . $groupe->section->nom . ')';
-                })->join(', ');
-            } else {
-                $groupes = 'Aucun groupe affecté';
-            }
-
-            $data[] = [
-                'dates_creneaux' => $dateCreneau,
-                'module' => $firstExam->module->libelle,
-                'local' => $local,
-                'groupes' => $groupes,
-                'enseignants' => $enseignants,
-            ];
-        }
-
-        return collect($data);
+        return $this->extractExamData($this->examens);
     }
-
-
-
-
 
     public function headings(): array
     {
@@ -65,7 +24,48 @@ class ExportDataToExcel implements FromCollection, WithHeadings
             'Dates et créneaux',
             'Module',
             'Local',
+            'Groupes',
             'Enseignants',
         ];
+    }
+
+    public function extractExamData($examens)
+    {
+        $groupedExamens = $examens->groupBy('module.libelle');
+        $data = [];
+
+        foreach ($groupedExamens as $module => $exams) {
+            $datesCreneaux = collect();
+            $allEnseignants = collect();
+            $local = '';
+            $groupes = '';
+
+            foreach ($exams as $exam) {
+                $datesCreneaux->push($exam->crenau->jour->jour . ' ' . $exam->crenau->crenaux);
+                $allEnseignants = $allEnseignants->merge($exam->users->pluck('name'));
+
+                if (!$local) {
+                    $local = $exam->local->libelle . ' (' . $exam->local->type . ')';
+                    $groupes = $exam->local->groupes
+                        ? $exam->local->groupes->map(function ($groupe) {
+                            return $groupe->nom . ' (' . $groupe->section->nom . ')';
+                        })->join(', ')
+                        : 'Aucun groupe affecté';
+                }
+            }
+
+            $datesCreneauxStr = $datesCreneaux->unique()->implode(', ');
+            $enseignants = $allEnseignants->unique()->join(', ');
+
+            $data[] = [
+                'dates_creneaux' => $datesCreneauxStr,
+                'module' => $module,
+                'local' => $local,
+                'groupes' => $groupes,
+                'enseignants' => $enseignants,
+            ];
+        }
+
+        return collect($data);
     }
 }
